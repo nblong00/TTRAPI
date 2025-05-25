@@ -1,6 +1,7 @@
 import requests
 import pandas
 import utils
+import time
 
 url = "https://www.toontownrewritten.com/api/invasions"
 header={"Content-Type":"application/json",
@@ -9,12 +10,28 @@ header={"Content-Type":"application/json",
 
 
 def main():
-    response = requests.get(url, headers=header)
-    data = response.json()
-    utils.export_cleanedup_CSV_and_import(data)
-    result = pandas.read_csv('adjustedData.csv')
-    print(result)
-    
+    end_program = False
+    while not end_program:
+        response = requests.get(url, headers=header)
+        data = response.json()
+        utils.export_cleanedup_CSV_and_import(data)
+        result = pandas.read_csv("adjustedData.csv")
+        print(result)
+        print("\nDo you check for new invasions? (yes/no)")
+        for attempt in range(5):
+            if attempt == 4:
+                print("Too many invalid entries. Program closing...")
+                end_program = True
+                break
+            user_input = input("> ")
+            if user_input.lower() in ["no", "n"]:
+                end_program = True
+                break
+            elif user_input.lower() not in ["no", "n", "yes", "y", "ye"] and attempt <= 2:
+                print("Invalid entry. Would you like to check for new invasions? (yes/no)")
+                continue
+
+
+    time.sleep(0.5)
 
 main()
-                 
