@@ -21,6 +21,7 @@ def main():
     while not end_program:
         response = requests.get(url, headers=header)
         data = response.json()
+        print(f"Last updated at {utils.convert_epoch_timestamp(data)}\n")
         utils.export_cleanedup_CSV_and_import(data)
         result = pandas.read_csv("adjustedData.csv")
         print(result)
@@ -37,6 +38,7 @@ def main():
             elif user_input.lower() not in ["no", "n", "yes", "y", "ye"] and attempt <= 2:
                 print("Invalid entry. Would you like to check for new invasions? (yes/no)")
                 continue
+
     time.sleep(0.5)
 
 main()
