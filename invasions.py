@@ -2,8 +2,9 @@ import requests
 import pandas
 import utils
 import time
-import datetime
+import logging
 
+logging.basicConfig(filename="api.log", level=logging.INFO)
 url = "https://www.toontownrewritten.com/api/invasions"
 header={"Content-Type":"application/json",
         "Accept-Encoding":"deflate",
@@ -21,7 +22,8 @@ def main():
     while not end_program:
         response = requests.get(url, headers=header)
         data = response.json()
-        print(f"Last updated at {utils.convert_epoch_timestamp(data)}\n")
+        logging.info(f"{utils.dt()} - Response code received: {response.status_code}")
+        logging.info(f"Pulled API data updated from central TTR server at {utils.convert_epoch_timestamp(data)}")
         utils.export_cleanedup_CSV_and_import(data)
         result = pandas.read_csv("adjustedData.csv")
         print(result)
