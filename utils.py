@@ -22,7 +22,7 @@ def export_cleanedup_CSV_and_import(data):
     with open('adjustedData.csv', 'w+', newline='') as csvfile:
         reader = csv.reader(csvfile)
         writer = csv.writer(csvfile, delimiter=',', lineterminator='')
-        writer.writerow(['districtName', 'type', 'progress'])
+        writer.writerow(['DistrictName', 'Type', 'Progress'])
         csv_new_line(csvfile)
         for district in data['invasions']:
             if 'Tele\u0003marketer' in data['invasions'][district]['type']:
