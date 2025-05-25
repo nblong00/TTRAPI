@@ -16,14 +16,25 @@ def welcome():
     print(f"It is currently {utils.dt()}\n")
     time.sleep(0.5)
 
+
 def main():
     end_program = False
     welcome()
     while not end_program:
         response = requests.get(url, headers=header)
-        data = response.json()
-        logging.info(f"{utils.dt()} - Response code received: {response.status_code}")
-        logging.info(f"Pulled API data updated from central TTR server at {utils.convert_epoch_timestamp(data)}")
+        if response.status_code != 200:
+            logging.warning(f"{utils.dt()} - Response code received: {response.status_code}")
+            print(f"API responded with an unsuccessful {response.status_code} code.")
+        else:
+            logging.info(f"{utils.dt()} - Response code received: {response.status_code}")
+        try:
+            data = response.json()
+        except requests.exceptions.JSONDecodeError:
+            logging.error(f"{utils.dt()} - API JSON may be malformed. It was unable to extract from response.")
+            input("Press ENTER to close program...")
+            exit()
+
+        logging.info(f"API data updated from central TTR server at {utils.convert_epoch_timestamp(data)}")
         utils.export_cleanedup_CSV_and_import(data)
         result = pandas.read_csv("adjustedData.csv")
         print(result)
@@ -40,7 +51,7 @@ def main():
             elif user_input.lower() not in ["no", "n", "yes", "y", "ye"] and attempt <= 2:
                 print("Invalid entry. Would you like to check for new invasions? (yes/no)")
                 continue
-
     time.sleep(0.5)
+
 
 main()
