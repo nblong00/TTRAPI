@@ -1,4 +1,5 @@
 import csv
+import datetime
 
 
 def csv_new_line(csvfile):
@@ -6,6 +7,11 @@ def csv_new_line(csvfile):
     if lastchar != '\n':
         csvfile.write('\n')
 
+
+def dt():
+    current_dt = datetime.datetime.now()
+    converted_dt = datetime.datetime.strftime(current_dt, "%I:%M%p on %m-%d-%Y")
+    return converted_dt
 
 def export_cleanedup_CSV_and_import(data):
     with open('adjustedData.csv', 'w+', newline='') as csvfile:
