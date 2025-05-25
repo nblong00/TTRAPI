@@ -10,8 +10,13 @@ def csv_new_line(csvfile):
 
 def dt():
     current_dt = datetime.datetime.now()
-    converted_dt = datetime.datetime.strftime(current_dt, "%I:%M%p on %m-%d-%Y")
-    return converted_dt
+    dt_string = datetime.datetime.strftime(current_dt, "%I:%M%p on %m-%d-%Y")
+    return dt_string
+
+def convert_epoch_timestamp(data):
+    converted_epoch_timestamp = datetime.datetime.fromtimestamp(data["lastUpdated"])
+    dt_string = datetime.datetime.strftime(converted_epoch_timestamp, "%I:%M%p on %m-%d-%Y")
+    return dt_string
 
 def export_cleanedup_CSV_and_import(data):
     with open('adjustedData.csv', 'w+', newline='') as csvfile:
