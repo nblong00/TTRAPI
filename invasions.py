@@ -12,7 +12,7 @@ header={"Content-Type":"application/json",
 
 
 def welcome():
-    print("\n-Welcome to the ToonTown Rewritten invasion scanner-")
+    print("\n-Welcome to the ToonTown Rewritten (TTR) invasion scanner-")
     print(f"It is currently {utils.dt()}\n")
     time.sleep(0.5)
 
@@ -31,25 +31,30 @@ def sorting_for_CSV(data):
             utils.write_data_to_CSV(data_to_write)
 
 
+def error_checking_and_logging(response):
+    if response.status_code != 200:
+            logging.warning(f"{utils.dt()} - Response code received: {response.status_code}")
+            print(f"API responded with an unsuccessful {response.status_code} code.")
+    else:
+        logging.info(f"{utils.dt()} - Response code received: {response.status_code}")
+    try:
+        data = response.json()
+        logging.info(f"API data updated from central TTR server at {utils.convert_epoch_timestamp_string(data)}")
+        return data
+    except requests.exceptions.JSONDecodeError:
+        logging.error(f"{utils.dt()} - API JSON may be malformed. " + 
+                    "We were unable to extract data from the response.")
+        input("Press ENTER to close program...")
+        exit()
+
+
 def main():
     end_program = False
     column_names = ['DistrictName', 'Type', 'Progress']
     welcome()
     while not end_program:
         response = requests.get(url, headers=header)
-        if response.status_code != 200:
-            logging.warning(f"{utils.dt()} - Response code received: {response.status_code}")
-            print(f"API responded with an unsuccessful {response.status_code} code.")
-        else:
-            logging.info(f"{utils.dt()} - Response code received: {response.status_code}")
-        try:
-            data = response.json()
-        except requests.exceptions.JSONDecodeError:
-            logging.error(f"{utils.dt()} - API JSON may be malformed. " + 
-                        "We were unable to extract data from the response.")
-            input("Press ENTER to close program...")
-            exit()
-        logging.info(f"API data updated from central TTR server at {utils.convert_epoch_timestamp_string(data)}")
+        data = error_checking_and_logging(response)
         utils.create_CSV_for_data(column_names)
         sorting_for_CSV(data)
         result = pandas.read_csv("adjustedData.csv")
