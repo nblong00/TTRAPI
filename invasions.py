@@ -3,6 +3,9 @@ import pandas
 import utils
 import time
 import logging
+import datetime
+from dateutil import relativedelta
+import math
 
 logging.basicConfig(filename="api.log", level=logging.INFO)
 url = "https://www.toontownrewritten.com/api/invasions"
@@ -24,6 +27,10 @@ def sorting_for_CSV(data):
             data_to_write = [district, 
                             data['invasions'][district]['type'],
                             data['invasions'][district]['progress']]
+            # print(datetime.datetime.fromtimestamp(data['invasions'][district]['startTimestamp']))
+            # max_progress_value = int(data['invasions'][district]['progress'].split("/")[1])
+            # max_time_for_invasion = math.ceil((max_progress_value * 0.7) / 60)
+            # print(max_time_for_invasion)
             if 'Tele\u0003marketer' in data['invasions'][district]['type']:
                 data['invasions'][district]['type'] = "Telemarketer" 
             elif 'Micro\u0003manager' in data['invasions'][district]['type']:
@@ -41,7 +48,8 @@ def error_checking_and_logging(response):
         logging.info(f"{utils.dt()} - Response code received: {response.status_code}")
     try:
         data = response.json()
-        logging.info(f"API data updated from central TTR server at {utils.convert_epoch_timestamp_string(data)}")
+        logging.info(f"API data updated from central TTR server at " + 
+                    f"{utils.convert_epoch_timestamp_string(data)}")
         return data
     except requests.exceptions.JSONDecodeError:
         logging.error(f"{utils.dt()} - API JSON may be malformed. " + 
