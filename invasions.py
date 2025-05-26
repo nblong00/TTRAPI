@@ -12,7 +12,7 @@ header={"Content-Type":"application/json",
 
 
 def welcome():
-    print("\n-Welcome to the TTR invasions scanner-")
+    print("\n-Welcome to the ToonTown Rewritten invasion scanner-")
     print(f"It is currently {utils.dt()}\n")
     time.sleep(0.5)
 
@@ -30,15 +30,15 @@ def main():
         try:
             data = response.json()
         except requests.exceptions.JSONDecodeError:
-            logging.error(f"{utils.dt()} - API JSON may be malformed. It was unable to extract from response.")
+            logging.error(f"{utils.dt()} - API JSON may be malformed. " + 
+                        "We were unable to extract data from the response.")
             input("Press ENTER to close program...")
             exit()
-
         logging.info(f"API data updated from central TTR server at {utils.convert_epoch_timestamp(data)}")
         utils.export_cleanedup_CSV_and_import(data)
         result = pandas.read_csv("adjustedData.csv")
         print(result)
-        print("\nDo you check for new invasions? (yes/no)")
+        print("\nDo you want to pull a new list of current invasions? (yes/no)")
         for attempt in range(5):
             if attempt == 4:
                 print("Too many invalid entries. Program closing...")
@@ -47,10 +47,15 @@ def main():
             user_input = input("> ")
             if user_input.lower() in ["no", "n"]:
                 end_program = True
+                print("\nThank you for using the TTR invasion scanner!\n")
                 break
             elif user_input.lower() not in ["no", "n", "yes", "y", "ye"] and attempt <= 2:
                 print("Invalid entry. Would you like to check for new invasions? (yes/no)")
                 continue
+            else:
+                print("\nPulling current invasions in ToonTown Rewritten...\n")
+                time.sleep(1)
+                break
     time.sleep(0.5)
 
 
