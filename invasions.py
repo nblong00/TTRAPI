@@ -48,9 +48,33 @@ def error_checking_and_logging(response):
         exit()
 
 
+def pull_API_data_again(end_program):
+    for attempt in range(5):
+        if attempt == 4:
+            print("Too many invalid entries. Program closing...")
+            end_program = True
+            return end_program
+        user_input = input("> ")
+        if user_input.lower() in ["no", "n"]:
+            end_program = True
+            print("\nThank you for using the ToonTown Rewritten invasion scanner!")
+            print("Program closing...")
+            return end_program
+        elif user_input.lower() not in ["no", "n", "yes", "y", "ye"] and attempt <= 2:
+            print("Invalid entry. Would you like to check for new invasions? (yes/no)")
+            continue
+        elif user_input.lower() in ["yes", "y", "ye"] and attempt <= 3:
+            print("\nPulling current invasions in ToonTown Rewritten...\n")
+            end_program = False
+            time.sleep(1)
+            return end_program
+        else:
+            pass
+
+
 def main():
     end_program = False
-    column_names = ['DistrictName', 'Type', 'Progress']
+    column_names = ["DistrictName", "Type", "Progress"]
     welcome()
     while not end_program:
         response = requests.get(url, headers=header)
@@ -60,23 +84,7 @@ def main():
         result = pandas.read_csv("adjustedData.csv")
         print(result)
         print("\nDo you want to pull a new list of current invasions? (yes/no)")
-        for attempt in range(5):
-            if attempt == 4:
-                print("Too many invalid entries. Program closing...")
-                end_program = True
-                break
-            user_input = input("> ")
-            if user_input.lower() in ["no", "n"]:
-                end_program = True
-                print("\nThank you for using the TTR invasion scanner!\n")
-                break
-            elif user_input.lower() not in ["no", "n", "yes", "y", "ye"] and attempt <= 2:
-                print("Invalid entry. Would you like to check for new invasions? (yes/no)")
-                continue
-            else:
-                print("\nPulling current invasions in ToonTown Rewritten...\n")
-                time.sleep(1)
-                break
+        end_program = pull_API_data_again(end_program)
     time.sleep(0.5)
 
 
