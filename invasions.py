@@ -17,8 +17,23 @@ def welcome():
     time.sleep(0.5)
 
 
+def sorting_for_CSV(data):
+    for district in data['invasions']:
+            data_to_write = [district, 
+                            data['invasions'][district]['type'],
+                            data['invasions'][district]['progress']]
+            if 'Tele\u0003marketer' in data['invasions'][district]['type']:
+                data['invasions'][district]['type'] = "Telemarketer" 
+            elif 'Micro\u0003manager' in data['invasions'][district]['type']:
+                data['invasions'][district]['type'] = "Micromanager"
+            else:
+                pass
+            utils.write_data_to_CSV(data_to_write)
+
+
 def main():
     end_program = False
+    column_names = ['DistrictName', 'Type', 'Progress']
     welcome()
     while not end_program:
         response = requests.get(url, headers=header)
@@ -34,8 +49,9 @@ def main():
                         "We were unable to extract data from the response.")
             input("Press ENTER to close program...")
             exit()
-        logging.info(f"API data updated from central TTR server at {utils.convert_epoch_timestamp(data)}")
-        utils.export_cleanedup_CSV_and_import(data)
+        logging.info(f"API data updated from central TTR server at {utils.convert_epoch_timestamp_string(data)}")
+        utils.create_CSV_for_data(column_names)
+        sorting_for_CSV(data)
         result = pandas.read_csv("adjustedData.csv")
         print(result)
         print("\nDo you want to pull a new list of current invasions? (yes/no)")
