@@ -18,6 +18,8 @@ def welcome():
 
 
 def sorting_for_CSV(data):
+    column_names = ["DistrictName", "Type", "Progress"]
+    utils.create_CSV_for_data(column_names)
     for district in data['invasions']:
             data_to_write = [district, 
                             data['invasions'][district]['type'],
@@ -74,12 +76,10 @@ def pull_API_data_again(end_program):
 
 def main():
     end_program = False
-    column_names = ["DistrictName", "Type", "Progress"]
     welcome()
     while not end_program:
         response = requests.get(url, headers=header)
         data = error_checking_and_logging(response)
-        utils.create_CSV_for_data(column_names)
         sorting_for_CSV(data)
         result = pandas.read_csv("adjustedData.csv")
         print(result)
