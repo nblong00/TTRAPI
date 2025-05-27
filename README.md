@@ -11,6 +11,6 @@ Assuming you have Python 3 installed, you just need to run the below commands in
 
 Below are links for external API Endpoints and Python library documentation used in scripts:
 
-* TTR Invasions API - https://github.com/ToontownRewritten/api-doc/blob/master/invasions.md
+* TTR Invasions API endpoint - https://github.com/ToontownRewritten/api-doc/blob/master/invasions.md
 * Pandas - https://pandas.pydata.org/docs/
 * Dateutil - https://dateutil.readthedocs.io/en/stable/
