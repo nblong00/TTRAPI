@@ -14,8 +14,8 @@ def dt():
     return dt_string
 
 
-def convert_epoch_timestamp_string(data):
-    converted_epoch_timestamp = datetime.datetime.fromtimestamp(data["lastUpdated"])
+def convert_epoch_timestamp_string(data, lastUpdated):
+    converted_epoch_timestamp = datetime.datetime.fromtimestamp(data[lastUpdated])
     dt_string = datetime.datetime.strftime(converted_epoch_timestamp, "%I:%M%p on %m-%d-%Y")
     return dt_string
 
