@@ -41,18 +41,23 @@ def remaining_invasion_time(data, district):
     converted_starting_timestamp = (datetime.datetime.fromtimestamp(data["invasions"][district]["startTimestamp"]))
     max_progress_value = int(data["invasions"][district]["progress"].split("/")[1])
     allowed_time_for_invasion = math.ceil((max_progress_value * 0.7) / 60)
-    hours = 0
-    if divmod(allowed_time_for_invasion, 60)[0] == 1:
-        hours = 1
+    hours_left = 0
+    minutes_left = 0
+    if divmod(allowed_time_for_invasion, 60)[0] >= 1:
+        hours_left = 1
         minutes_left = divmod(allowed_time_for_invasion, 60)[1]
-        invasion_end_time = converted_starting_timestamp + datetime.timedelta(hours = hours, 
+        # Accounting for Mega-Invasions (time based)
+        if max_progress_value == 1000000:
+            hours_left = 3
+            data["invasions"][district]["progress"] = "-Mega-Invasion-"
+        invasion_end_time = converted_starting_timestamp + datetime.timedelta(hours = hours_left, 
                                                                             minutes = minutes_left)
     else:
         minutes_left = divmod(allowed_time_for_invasion, 60)[1]
         invasion_end_time = converted_starting_timestamp + datetime.timedelta(minutes = minutes_left)
     diff_between_now_and_invasion_end = relativedelta.relativedelta(invasion_end_time, 
                                                                     datetime.datetime.now())
-    if diff_between_now_and_invasion_end.hours == 1:
+    if diff_between_now_and_invasion_end.hours >= 1:
         time_remaining_in_invasion = f"{diff_between_now_and_invasion_end.hours} hour {diff_between_now_and_invasion_end.minutes} minutes"
         if diff_between_now_and_invasion_end.minutes in range(10):
             # Explicit double space on below line for formatting in command prompt
@@ -113,9 +118,7 @@ def checking_if_error_is_active(data, end_program):
         logging.error(f"API is reporting error in payload: {data["error"]}")
         time.sleep(1.5)
         input("Press ENTER to close...")
-        end_program = True
-    return end_program
-
+        exit()
 
 def main():
     end_program = False
@@ -123,8 +126,7 @@ def main():
     while not end_program:
         response = requests.get(url, headers=header)
         data = error_checking_and_logging(response)
-        if checking_if_error_is_active(data, end_program):
-            break
+        checking_if_error_is_active(data, end_program)
         sorting_for_CSV(data)
         result = pandas.read_csv("adjustedData.csv")
         print(result)
