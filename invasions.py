@@ -46,7 +46,7 @@ def remaining_invasion_time(data, district):
         hours = 1
         minutes_left = divmod(allowed_time_for_invasion, 60)[1]
         invasion_end_time = converted_starting_timestamp + datetime.timedelta(hours = hours, 
-                                                                                minutes = minutes_left)
+                                                                            minutes = minutes_left)
     else:
         minutes_left = divmod(allowed_time_for_invasion, 60)[1]
         invasion_end_time = converted_starting_timestamp + datetime.timedelta(minutes = minutes_left)
@@ -58,7 +58,7 @@ def remaining_invasion_time(data, district):
             # Explicit double space on below line for formatting in command prompt
             time_remaining_in_invasion = f"{diff_between_now_and_invasion_end.hours} hour  {diff_between_now_and_invasion_end.minutes} minutes"
         return time_remaining_in_invasion
-    elif diff_between_now_and_invasion_end.minutes == 0:
+    elif diff_between_now_and_invasion_end.minutes <= 0:
         ending_message = "Invasion ending"
         return ending_message
     else:
