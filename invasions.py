@@ -28,6 +28,8 @@ def sorting_for_CSV(data):
                 data["invasions"][district]["type"] = "Telemarketer" 
             elif "Micro\u0003manager" in data["invasions"][district]["type"]:
                 data["invasions"][district]["type"] = "Micromanager"
+            elif "Blood\u0003sucker" in data["invasions"][district]["type"]:
+                data["invasions"][district]["type"] = "Bloodsucker"
             data_to_write = [district, 
                             data["invasions"][district]["type"],
                             data["invasions"][district]["progress"],
@@ -57,7 +59,7 @@ def remaining_invasion_time(data, district):
             time_remaining_in_invasion = f"{diff_between_now_and_invasion_end.hours} hour  {diff_between_now_and_invasion_end.minutes} minutes"
         return time_remaining_in_invasion
     elif diff_between_now_and_invasion_end.minutes == 0:
-        ending_message = "Invasion ending..."
+        ending_message = "Invasion ending"
         return ending_message
     else:
         time_remaining_in_invasion = f"{diff_between_now_and_invasion_end.minutes} minutes"
