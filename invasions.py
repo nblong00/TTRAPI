@@ -104,12 +104,25 @@ def pull_API_data_again(end_program):
             return end_program
 
 
+def checking_if_error_is_active(data, end_program):
+    if data["error"] != None:
+        print("Error relayed via API.")
+        print("Documenting error in logs...")
+        logging.error(f"API is reporting error in payload: {data["error"]}")
+        time.sleep(1.5)
+        input("Press ENTER to close...")
+        end_program = True
+    return end_program
+
+
 def main():
     end_program = False
     welcome()
     while not end_program:
         response = requests.get(url, headers=header)
         data = error_checking_and_logging(response)
+        if checking_if_error_is_active(data, end_program):
+            break
         sorting_for_CSV(data)
         result = pandas.read_csv("adjustedData.csv")
         print(result)
