@@ -4,8 +4,8 @@ import datetime
 
 def csv_new_line(csvfile):
     lastchar = csvfile.read(1)
-    if lastchar != '\n':
-        csvfile.write('\n')
+    if lastchar != "\n":
+        csvfile.write("\n")
 
 
 def dt():
