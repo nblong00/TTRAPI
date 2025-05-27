@@ -1,10 +1,10 @@
+from dateutil import relativedelta
 import requests
 import pandas
 import utils
 import time
 import logging
 import datetime
-from dateutil import relativedelta
 import math
 
 logging.basicConfig(filename="api.log", level=logging.INFO)
