@@ -23,21 +23,21 @@ def welcome():
 def sorting_for_CSV(data):
     column_names = ["DistrictName", "Type", "Progress", "InvasionTimeoutIn"]
     utils.create_CSV_for_data(column_names)
-    for district in data['invasions']:
-            if 'Tele\u0003marketer' in data['invasions'][district]['type']:
-                data['invasions'][district]['type'] = "Telemarketer" 
-            elif 'Micro\u0003manager' in data['invasions'][district]['type']:
-                data['invasions'][district]['type'] = "Micromanager"
+    for district in data["invasions"]:
+            if "Tele\u0003marketer" in data["invasions"][district]["type"]:
+                data["invasions"][district]["type"] = "Telemarketer" 
+            elif "Micro\u0003manager" in data["invasions"][district]["type"]:
+                data["invasions"][district]["type"] = "Micromanager"
             data_to_write = [district, 
-                            data['invasions'][district]['type'],
-                            data['invasions'][district]['progress'],
+                            data["invasions"][district]["type"],
+                            data["invasions"][district]["progress"],
                             remaining_invasion_time(data, district)]
             utils.write_data_to_CSV(data_to_write)
 
 
 def remaining_invasion_time(data, district):
-    converted_starting_timestamp = (datetime.datetime.fromtimestamp(data['invasions'][district]['startTimestamp']))
-    max_progress_value = int(data['invasions'][district]['progress'].split("/")[1])
+    converted_starting_timestamp = (datetime.datetime.fromtimestamp(data["invasions"][district]["startTimestamp"]))
+    max_progress_value = int(data["invasions"][district]["progress"].split("/")[1])
     allowed_time_for_invasion = math.ceil((max_progress_value * 0.7) / 60)
     hours = 0
     if divmod(allowed_time_for_invasion, 60)[0] == 1:
