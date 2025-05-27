@@ -115,7 +115,7 @@ def checking_if_error_is_active(data, end_program):
     if data["error"] != None:
         print("Error relayed via API.")
         print("Documenting error in logs...")
-        logging.error(f"API is reporting error in payload: {data["error"]}")
+        logging.error(f"{utils.dt()} - API is reporting error in payload: {data["error"]}")
         time.sleep(1.5)
         input("Press ENTER to close...")
         exit()
