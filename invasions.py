@@ -73,7 +73,7 @@ def error_checking_and_logging(response):
     try:
         data = response.json()
         logging.info(f"API data updated from central TTR server at " + 
-                    f"{utils.convert_epoch_timestamp_string(data)}")
+                    f"{utils.convert_epoch_timestamp_string(data, "lastUpdated")}")
         return data
     except requests.exceptions.JSONDecodeError:
         logging.error(f"{utils.dt()} - API JSON may be malformed. " + 
