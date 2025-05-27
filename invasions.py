@@ -21,23 +21,49 @@ def welcome():
 
 
 def sorting_for_CSV(data):
-    column_names = ["DistrictName", "Type", "Progress"]
+    column_names = ["DistrictName", "Type", "Progress", "InvasionTimeoutIn"]
     utils.create_CSV_for_data(column_names)
     for district in data['invasions']:
-            data_to_write = [district, 
-                            data['invasions'][district]['type'],
-                            data['invasions'][district]['progress']]
-            # print(datetime.datetime.fromtimestamp(data['invasions'][district]['startTimestamp']))
-            # max_progress_value = int(data['invasions'][district]['progress'].split("/")[1])
-            # max_time_for_invasion = math.ceil((max_progress_value * 0.7) / 60)
-            # print(max_time_for_invasion)
             if 'Tele\u0003marketer' in data['invasions'][district]['type']:
                 data['invasions'][district]['type'] = "Telemarketer" 
             elif 'Micro\u0003manager' in data['invasions'][district]['type']:
                 data['invasions'][district]['type'] = "Micromanager"
             else:
                 pass
+            data_to_write = [district, 
+                            data['invasions'][district]['type'],
+                            data['invasions'][district]['progress'],
+                            remaining_invasion_time(data, district)]
             utils.write_data_to_CSV(data_to_write)
+
+
+def remaining_invasion_time(data, district):
+    converted_starting_timestamp = (datetime.datetime.fromtimestamp(data['invasions'][district]['startTimestamp']))
+    max_progress_value = int(data['invasions'][district]['progress'].split("/")[1])
+    allowed_time_for_invasion = math.ceil((max_progress_value * 0.7) / 60)
+    hours = 0
+    if divmod(allowed_time_for_invasion, 60)[0] == 1:
+        hours = 1
+        minutes_left = divmod(allowed_time_for_invasion, 60)[1]
+        invasion_end_time = converted_starting_timestamp + datetime.timedelta(hours = hours, 
+                                                                                minutes = minutes_left)
+    else:
+        minutes_left = divmod(allowed_time_for_invasion, 60)[1]
+        invasion_end_time = converted_starting_timestamp + datetime.timedelta(minutes = minutes_left)
+    diff_between_now_and_invasion_end = relativedelta.relativedelta(invasion_end_time, 
+                                                                    datetime.datetime.now())
+    if diff_between_now_and_invasion_end.hours == 1:
+        time_remaining_in_invasion = f"{diff_between_now_and_invasion_end.hours} hour {diff_between_now_and_invasion_end.minutes} minutes"
+        if diff_between_now_and_invasion_end.minutes in range(10):
+            # Explicit double space on below line for formatting in command prompt
+            time_remaining_in_invasion = f"{diff_between_now_and_invasion_end.hours} hour  {diff_between_now_and_invasion_end.minutes} minutes"
+        return time_remaining_in_invasion
+    elif diff_between_now_and_invasion_end.minutes == 0:
+        ending_message = "Invasion ending..."
+        return ending_message
+    else:
+        time_remaining_in_invasion = f"{diff_between_now_and_invasion_end.minutes} minutes"
+        return time_remaining_in_invasion
 
 
 def error_checking_and_logging(response):
