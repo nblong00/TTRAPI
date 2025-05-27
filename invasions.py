@@ -9,7 +9,7 @@ import math
 
 logging.basicConfig(filename="api.log", level=logging.INFO)
 url = "https://www.toontownrewritten.com/api/invasions"
-header={"Content-Type":"application/json",
+header = {"Content-Type":"application/json",
         "Accept-Encoding":"deflate",
         "User-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0) Gecko/20100101 Firefox/138.0"}
 
@@ -119,6 +119,7 @@ def checking_if_error_is_active(data, end_program):
         time.sleep(1.5)
         input("Press ENTER to close...")
         exit()
+
 
 def main():
     end_program = False
