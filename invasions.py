@@ -28,8 +28,6 @@ def sorting_for_CSV(data):
                 data['invasions'][district]['type'] = "Telemarketer" 
             elif 'Micro\u0003manager' in data['invasions'][district]['type']:
                 data['invasions'][district]['type'] = "Micromanager"
-            else:
-                pass
             data_to_write = [district, 
                             data['invasions'][district]['type'],
                             data['invasions'][district]['progress'],
@@ -104,8 +102,6 @@ def pull_API_data_again(end_program):
             end_program = False
             time.sleep(1)
             return end_program
-        else:
-            pass
 
 
 def main():
