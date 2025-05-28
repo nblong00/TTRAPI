@@ -66,11 +66,24 @@ def pull_API_data_again(end_program):
 
 
 def user_options(data):
-    print("Enter one of the below number options:" +
+    failed_input = True
+    options = ("Enter one of the below number options:" +
               "\n1 - See all district populations" + 
               "\n2 - See only high population districts" +
               "\n3 - See only low population districts\n")
-    user_input = input("> ")
+    print(options)
+    while failed_input:
+        for i in range(5):
+            if i == 4:
+                print("Too many invalid entries. Program exiting...")
+                time.sleep(1)
+                exit()
+            user_input = input("> ")
+            if user_input not in ["1", "2", "3"]:
+                print(f"\nInvalid input. {options}")
+            else:
+                failed_input = False
+                break
     print()
     get_API_write_csv(data, user_input)
 
@@ -91,5 +104,6 @@ def main():
         print("\nWould you like to refresh the population map? (yes/no)\n")
         end_program = pull_API_data_again(end_program)
     time.sleep(1.5)
+
 
 main()
