@@ -57,7 +57,7 @@ def pull_API_data_again(end_program):
             print("Invalid entry. Would you like to refresh the population map? (yes/no)")
             continue
         elif user_input.lower() in ["yes", "y", "ye"] and attempt <= 3:
-            print("\nPulling the current population in ToonTown Rewritten...\n")
+            print("\nRestarting Population Map Program...\n")
             end_program = False
             time.sleep(1)
             return end_program
@@ -68,8 +68,12 @@ def user_options(data):
               "\n1 - See all district populations" + 
               "\n2 - See only high population districts" +
               "\n3 - See only low population districts\n")
-    user_input = input("> \n")
+    user_input = input("> ")
     get_API_write_csv(data, user_input)
+
+
+def error_checking_and_logging():
+    pass
 
 
 def main():
