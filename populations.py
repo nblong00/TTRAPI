@@ -14,7 +14,7 @@ header = {"Content-Type":"application/json",
 def welcome(data):
     print("\n-Welcome to the ToonTown Rewritten (TTR) Population Map-")
     print(f"It is currently {utils.dt()}")
-    print(f"Total population: {data['totalPopulation']} users\n")
+    print(f"Total population: {data['totalPopulation']} users")
     time.sleep(0.5)
 
 
@@ -54,8 +54,14 @@ def pull_API_data_again(end_program, refresh_current_map_pop, restart_program):
         if user_input.lower() in ["no", "n"]:
             end_program = True
             restart_program = False
-            print("\nThank you for using the ToonTown Rewritten Population Map!")
-            print("Program closing...")
+            print("\nWould you like to restart the Population Map program? (yes/no)\n")
+            restart_program_input = input("> ")
+            if restart_program_input in ["yes", "y", "ye"]:
+                restart_program = True
+                end_program = False
+            else:
+                print("\nThank you for using the ToonTown Rewritten Population Map!")
+                print("Program closing...")
             return end_program, refresh_current_map_pop, restart_program
         elif user_input.lower() not in ["no", "n", "yes", "y", "ye"] and attempt <= 2:
             print("\nInvalid entry. Would you like to refresh the current population map? (yes/no)\n")
@@ -70,7 +76,7 @@ def pull_API_data_again(end_program, refresh_current_map_pop, restart_program):
 
 def user_options():
     failed_input = True
-    options = ("Enter one of the below number options:" +
+    options = ("\nEnter one of the below number options:" +
               "\n1 - See all district populations" + 
               "\n2 - See only high population districts" +
               "\n3 - See only low population districts\n")
