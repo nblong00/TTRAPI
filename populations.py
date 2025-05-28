@@ -43,29 +43,32 @@ def get_API_write_csv(data, user_input):
         utils.write_data_to_CSV(data_to_write)
 
 
-def pull_API_data_again(end_program):
+def pull_API_data_again(end_program, refresh_current_map_pop, restart_program):
     for attempt in range(5):
         if attempt == 4:
             print("Too many invalid entries. Program closing...")
             end_program = True
-            return end_program
+            restart_program = False
+            return end_program, refresh_current_map_pop, restart_program
         user_input = input("> ")
         if user_input.lower() in ["no", "n"]:
             end_program = True
+            restart_program = False
             print("\nThank you for using the ToonTown Rewritten Population Map!")
             print("Program closing...")
-            return end_program
+            return end_program, refresh_current_map_pop, restart_program
         elif user_input.lower() not in ["no", "n", "yes", "y", "ye"] and attempt <= 2:
             print("\nInvalid entry. Would you like to refresh the current population map? (yes/no)\n")
             continue
         elif user_input.lower() in ["yes", "y", "ye"] and attempt <= 3:
-            print("\nRefreshing Current Population Map...")
+            print("\nRefreshing Current Population Map...\n")
             time.sleep(0.5)
-            end_program = False
-            return end_program
+            refresh_current_map_pop = True
+            restart_program = False
+            return end_program, refresh_current_map_pop, restart_program
 
 
-def user_options(data):
+def user_options():
     failed_input = True
     options = ("Enter one of the below number options:" +
               "\n1 - See all district populations" + 
@@ -85,24 +88,36 @@ def user_options(data):
                 failed_input = False
                 break
     print()
-    get_API_write_csv(data, user_input)
+    return user_input
 
 
 def error_checking_and_logging():
     pass
 
 
+def api_get_call():
+    response = requests.get(url, headers=header)
+    data = response.json() 
+    return data
+
 def main():
     end_program = False
+    refresh_current_map_pop = False
+    restart_program = True
+    data = api_get_call()
+    welcome(data)
     while not end_program:
-        response = requests.get(url, headers=header)
-        data = response.json()
-        welcome(data)
-        user_options(data)
-        result = pandas.read_csv("adjustedData.csv")
-        print(result)
-        print("\nWould you like to refresh the population map? (yes/no)\n")
-        end_program = pull_API_data_again(end_program)
+        user_input = user_options()
+        get_API_write_csv(data, user_input)
+        while refresh_current_map_pop or restart_program:
+            result = pandas.read_csv("adjustedData.csv")
+            print(result)
+            print("\nWould you like to refresh the current population map? (yes/no)\n")
+            end_program, refresh_current_map_pop, restart_program = pull_API_data_again(end_program,
+                                                                                        refresh_current_map_pop,
+                                                                                        restart_program)
+            if restart_program or end_program:
+                break
     time.sleep(1.5)
 
 
