@@ -59,9 +59,9 @@ def pull_API_data_again(end_program):
             print("Invalid entry. Would you like to refresh the population map? (yes/no)")
             continue
         elif user_input.lower() in ["yes", "y", "ye"] and attempt <= 3:
-            print("\nRestarting Population Map Program...\n")
+            print("\nRestarting Population Map Program...")
+            time.sleep(0.5)
             end_program = False
-            time.sleep(1)
             return end_program
 
 
