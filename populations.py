@@ -56,10 +56,10 @@ def pull_API_data_again(end_program):
             print("Program closing...")
             return end_program
         elif user_input.lower() not in ["no", "n", "yes", "y", "ye"] and attempt <= 2:
-            print("Invalid entry. Would you like to refresh the population map? (yes/no)")
+            print("\nInvalid entry. Would you like to refresh the current population map? (yes/no)\n")
             continue
         elif user_input.lower() in ["yes", "y", "ye"] and attempt <= 3:
-            print("\nRestarting Population Map Program...")
+            print("\nRefreshing Current Population Map...")
             time.sleep(0.5)
             end_program = False
             return end_program
@@ -71,6 +71,7 @@ def user_options(data):
               "\n2 - See only high population districts" +
               "\n3 - See only low population districts\n")
     user_input = input("> ")
+    print()
     get_API_write_csv(data, user_input)
 
 
@@ -87,7 +88,7 @@ def main():
         user_options(data)
         result = pandas.read_csv("adjustedData.csv")
         print(result)
-        print("\nWould you like to restart the population map? (yes/no)")
+        print("\nWould you like to refresh the population map? (yes/no)\n")
         end_program = pull_API_data_again(end_program)
     time.sleep(1.5)
 
