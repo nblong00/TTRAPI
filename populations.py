@@ -1,6 +1,6 @@
 import requests
-import utils
 import pandas
+import utils
 import time
 
 url = "https://www.toontownrewritten.com/api/population"
@@ -63,21 +63,25 @@ def pull_API_data_again(end_program):
             return end_program
 
 
+def user_options(data):
+    print("Enter one of the below number options:" +
+              "\n1 - See all district populations" + 
+              "\n2 - See only high population districts" +
+              "\n3 - See only low population districts\n")
+    user_input = input("> \n")
+    get_API_write_csv(data, user_input)
+
+
 def main():
     end_program = False
     while not end_program:
         response = requests.get(url, headers=header)
         data = response.json()
         welcome(data)
-        print("Enter one of the below number options:" +
-              "\n1 - See all district populations" + 
-              "\n2 - See only high population districts" +
-              "\n3 - See only low population districts")
-        user_input = input("> ")
-        get_API_write_csv(data, user_input)
+        user_options(data)
         result = pandas.read_csv("adjustedData.csv")
         print(result)
-        print("\nWould you like to restart the population map?")
+        print("\nWould you like to restart the population map? (yes/no)")
         end_program = pull_API_data_again(end_program)
 
 main()
