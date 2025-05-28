@@ -89,6 +89,6 @@ def main():
         print(result)
         print("\nWould you like to restart the population map? (yes/no)")
         end_program = pull_API_data_again(end_program)
-
+    time.sleep(1.5)
 
 main()
