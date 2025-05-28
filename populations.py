@@ -9,9 +9,10 @@ header = {"Content-Type":"application/json",
         "User-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0) Gecko/20100101 Firefox/138.0"}
 
 
-def welcome():
-    print("\n-Welcome to the ToonTown Rewritten (TTR) invasion scanner-")
-    print(f"It is currently {utils.dt()}\n")
+def welcome(data):
+    print("\n-Welcome to the ToonTown Rewritten (TTR) Population Map-")
+    print(f"It is currently {utils.dt()}")
+    print(f"Total population: {data['totalPopulation']} users\n")
     time.sleep(0.5)
 
 
@@ -21,6 +22,7 @@ def get_API_write_csv(data):
                      "Status"]
     utils.create_CSV_for_data(column_names)
     for district in data["populationByDistrict"]:
+
         json_fields = [district, 
                        str(data["populationByDistrict"][district]) + " Users",
                        data["statusByDistrict"][district].title()]
@@ -28,12 +30,38 @@ def get_API_write_csv(data):
         utils.write_data_to_CSV(data_to_write)
 
 
+def pull_API_data_again(end_program):
+    for attempt in range(5):
+        if attempt == 4:
+            print("Too many invalid entries. Program closing...")
+            end_program = True
+            return end_program
+        user_input = input("> ")
+        if user_input.lower() in ["no", "n"]:
+            end_program = True
+            print("\nThank you for using the ToonTown Rewritten Population Map!")
+            print("Program closing...")
+            return end_program
+        elif user_input.lower() not in ["no", "n", "yes", "y", "ye"] and attempt <= 2:
+            print("Invalid entry. Would you like to refresh the population map? (yes/no)")
+            continue
+        elif user_input.lower() in ["yes", "y", "ye"] and attempt <= 3:
+            print("\nPulling the current population in ToonTown Rewritten...\n")
+            end_program = False
+            time.sleep(1)
+            return end_program
+
+
 def main():
-    welcome()
-    response = requests.get(url, headers=header)
-    data = response.json()
-    get_API_write_csv(data)
-    result = pandas.read_csv("adjustedData.csv")
-    print(result)
+    end_program = False
+    while not end_program:
+        response = requests.get(url, headers=header)
+        data = response.json()
+        welcome(data)
+        get_API_write_csv(data)
+        result = pandas.read_csv("adjustedData.csv")
+        print(result)
+        print("\nWould you like to refresh the population map?")
+        end_program = pull_API_data_again(end_program)
 
 main()
