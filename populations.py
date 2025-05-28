@@ -2,7 +2,9 @@ import requests
 import pandas
 import utils
 import time
+import logging
 
+logging.basicConfig(filename="api.log", level=logging.INFO)
 url = "https://www.toontownrewritten.com/api/population"
 header = {"Content-Type":"application/json",
         "Accept-Encoding":"deflate",
@@ -87,5 +89,6 @@ def main():
         print(result)
         print("\nWould you like to restart the population map? (yes/no)")
         end_program = pull_API_data_again(end_program)
+
 
 main()
