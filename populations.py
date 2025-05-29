@@ -56,11 +56,9 @@ def get_API_write_csv(data, user_input):
         json_to_write = []
         if user_input == "1":
             json_to_write = json_fields(data, district)
-        elif user_input == "2":
-            if data["populationByDistrict"][district] >= 150:
+        elif user_input == "2" and data["populationByDistrict"][district] >= 150:
                 json_to_write = json_fields(data, district)
-        elif user_input == "3":
-            if data["populationByDistrict"][district] <= 150:
+        elif user_input == "3" and data["populationByDistrict"][district] <= 150:
                 json_to_write = json_fields(data, district)
         data_to_write = json_to_write
         utils.write_data_to_CSV(data_to_write)
