@@ -94,14 +94,25 @@ def pull_API_data_again(end_program, refresh_current_map_pop, restart_program):
             end_program = True
             restart_program = False
             print("\nWould you like to go back to the Main Menu? (yes/no)\n")
-            restart_program_input = input("> ")
-            if restart_program_input in ["yes", "y", "ye"]:
-                restart_program = True
-                end_program = False
-            else:
-                print("\nThank you for using the ToonTown Rewritten Population Map!")
-                print("Program closing...")
-            return end_program, refresh_current_map_pop, restart_program
+            for input_attempt in range(5):
+                if input_attempt == 4:
+                    print("Too many invalid entries. Program closing...")
+                    end_program = True
+                    restart_program = False
+                    return end_program, refresh_current_map_pop, restart_program
+                restart_program_input = input("> ")
+                if restart_program_input in ["yes", "y", "ye"]:
+                    restart_program = True
+                    end_program = False
+                    return end_program, refresh_current_map_pop, restart_program
+                elif restart_program_input.lower() not in ["no", "n", "yes", "y", "ye"] and input_attempt <= 2:
+                    print("\nInvalid entry. Would you like to go back to the Main Menu? (yes/no)\n")
+                    continue
+                elif restart_program_input in ["no", "n"]:
+                    print("\nThank you for using the ToonTown Rewritten Population Map!")
+                    print("Program closing...")
+                    time.sleep(1.5)
+                    exit()
         elif user_input.lower() not in ["no", "n", "yes", "y", "ye"] and attempt <= 2:
             print("\nInvalid entry. Would you like to refresh the current population map? (yes/no)\n")
             continue
