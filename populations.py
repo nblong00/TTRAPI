@@ -24,6 +24,29 @@ def api_get_call():
     return data
 
 
+def user_options():
+    failed_input = True
+    options = ("\nEnter one of the below number options:" +
+              "\n1 - See all district populations" + 
+              "\n2 - See only high population districts" +
+              "\n3 - See only low population districts\n")
+    print(options)
+    while failed_input:
+        for i in range(5):
+            if i == 4:
+                print("Too many invalid entries. Program exiting...")
+                time.sleep(1)
+                exit()
+            user_input = input("> ")
+            if user_input not in ["1", "2", "3"] and i < 4:
+                print(f"\nInvalid input. {options}")
+            else:
+                failed_input = False
+                break
+    print()
+    return user_input
+
+
 def get_API_write_csv(data, user_input):
     column_names = ["DistrictName",
                      "Population",
@@ -47,29 +70,6 @@ def get_API_write_csv(data, user_input):
                         data["statusByDistrict"][district].title()]
         data_to_write = json_fields
         utils.write_data_to_CSV(data_to_write)
-
-
-def user_options():
-    failed_input = True
-    options = ("\nEnter one of the below number options:" +
-              "\n1 - See all district populations" + 
-              "\n2 - See only high population districts" +
-              "\n3 - See only low population districts\n")
-    print(options)
-    while failed_input:
-        for i in range(5):
-            if i == 4:
-                print("Too many invalid entries. Program exiting...")
-                time.sleep(1)
-                exit()
-            user_input = input("> ")
-            if user_input not in ["1", "2", "3"]:
-                print(f"\nInvalid input. {options}")
-            else:
-                failed_input = False
-                break
-    print()
-    return user_input
 
 
 def pull_API_data_again(end_program, refresh_current_map_pop, restart_program):
