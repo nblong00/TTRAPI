@@ -52,7 +52,6 @@ def get_API_write_csv(data, user_input):
                      "Population",
                      "Status"]
     utils.create_CSV_for_data(column_names)
-    dataframe_map_name(user_input)
     for district in data["populationByDistrict"]:
         json_fields = []
         if user_input == "1":
@@ -121,6 +120,7 @@ def logic_loops(data):
         user_input = user_options()
         get_API_write_csv(data, user_input)
         while refresh_current_map_pop or restart_program:
+            dataframe_map_name(user_input)
             result = pandas.read_csv("adjustedData.csv")
             print(result)
             print("\nWould you like to refresh the current population map? (yes/no)\n")
