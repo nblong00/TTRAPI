@@ -53,23 +53,24 @@ def get_API_write_csv(data, user_input):
                      "Status"]
     utils.create_CSV_for_data(column_names)
     for district in data["populationByDistrict"]:
-        json_fields = []
+        json_to_write = []
         if user_input == "1":
-            json_fields = [district, 
-                        str(data["populationByDistrict"][district]) + " Users",
-                        data["statusByDistrict"][district].title()]
+            json_to_write = json_fields(data, district)
         elif user_input == "2":
             if data["populationByDistrict"][district] >= 150:
-                json_fields = [district, 
-                        str(data["populationByDistrict"][district]) + " Users",
-                        data["statusByDistrict"][district].title()]
+                json_to_write = json_fields(data, district)
         elif user_input == "3":
             if data["populationByDistrict"][district] <= 150:
-                json_fields = [district, 
+                json_to_write = json_fields(data, district)
+        data_to_write = json_to_write
+        utils.write_data_to_CSV(data_to_write)
+
+
+def json_fields(data, district):
+    json_fields = [district, 
                         str(data["populationByDistrict"][district]) + " Users",
                         data["statusByDistrict"][district].title()]
-        data_to_write = json_fields
-        utils.write_data_to_CSV(data_to_write)
+    return json_fields
 
 
 def dataframe_map_name(user_input):
