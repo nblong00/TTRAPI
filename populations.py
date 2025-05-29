@@ -32,8 +32,8 @@ def user_options():
               "\n3 - See only low population districts\n")
     print(options)
     while failed_input:
-        for i in range(5):
-            if i == 4:
+        for attempt in range(5):
+            if attempt == 4:
                 print("Too many invalid entries. Program exiting...")
                 time.sleep(1)
                 exit()
@@ -89,8 +89,8 @@ def pull_API_data_again(end_program, refresh_current_map_pop, restart_program):
             end_program = True
             restart_program = False
             return end_program, refresh_current_map_pop, restart_program
-        user_input = input("> ")
-        if user_input.lower() in ["no", "n"]:
+        user_input = input("> ").lower()
+        if user_input in ["no", "n"]:
             end_program = True
             restart_program = False
             print("\nWould you like to go back to the Main Menu? (yes/no)\n")
@@ -100,12 +100,12 @@ def pull_API_data_again(end_program, refresh_current_map_pop, restart_program):
                     end_program = True
                     restart_program = False
                     return end_program, refresh_current_map_pop, restart_program
-                restart_program_input = input("> ")
+                restart_program_input = input("> ").lower()
                 if restart_program_input in ["yes", "y", "ye"]:
                     restart_program = True
                     end_program = False
                     return end_program, refresh_current_map_pop, restart_program
-                elif restart_program_input.lower() not in ["no", "n", "yes", "y", "ye"] and input_attempt <= 2:
+                elif restart_program_input not in ["no", "n", "yes", "y", "ye"] and input_attempt <= 2:
                     print("\nInvalid entry. Would you like to go back to the Main Menu? (yes/no)\n")
                     continue
                 elif restart_program_input in ["no", "n"]:
@@ -113,10 +113,10 @@ def pull_API_data_again(end_program, refresh_current_map_pop, restart_program):
                     print("Program closing...")
                     time.sleep(1.5)
                     exit()
-        elif user_input.lower() not in ["no", "n", "yes", "y", "ye"] and attempt <= 2:
+        elif user_input not in ["no", "n", "yes", "y", "ye"] and attempt <= 2:
             print("\nInvalid entry. Would you like to refresh the current population map? (yes/no)\n")
             continue
-        elif user_input.lower() in ["yes", "y", "ye"] and attempt <= 3:
+        elif user_input in ["yes", "y", "ye"] and attempt <= 3:
             print("\nRefreshing Current Population Map...\n")
             time.sleep(0.5)
             refresh_current_map_pop = True
