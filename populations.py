@@ -92,7 +92,7 @@ def pull_API_data_again(end_program, refresh_current_map_pop, restart_program):
         if user_input.lower() in ["no", "n"]:
             end_program = True
             restart_program = False
-            print("\nWould you like to restart the Population Map program? (yes/no)\n")
+            print("\nWould you like to go back to the Main Menu? (yes/no)\n")
             restart_program_input = input("> ")
             if restart_program_input in ["yes", "y", "ye"]:
                 restart_program = True
