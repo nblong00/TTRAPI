@@ -25,7 +25,7 @@ def api_get_call():
 
 
 def user_options():
-    failed_input = True
+    failed_input = 1
     options = ("\nEnter one of the below number options:" +
               "\n1 - See all district populations" + 
               "\n2 - See only high population districts" +
@@ -41,7 +41,7 @@ def user_options():
             if user_input not in ["1", "2", "3"]:
                 print(f"\nInvalid input. {options}")
             else:
-                failed_input = False
+                failed_input = 0
                 break
     print()
     return user_input
@@ -84,24 +84,24 @@ def pull_API_data_again(end_program, refresh_current_map_pop, restart_program):
     for attempt in range(5):
         if attempt == 4:
             print("Too many invalid entries. Program closing...")
-            end_program = True
-            restart_program = False
+            end_program = 1
+            restart_program = 0
             return end_program, refresh_current_map_pop, restart_program
         user_input = input("> ").lower()
         if user_input in ["no", "n"]:
-            end_program = True
-            restart_program = False
+            end_program = 1
+            restart_program = 0
             print("\nWould you like to go back to the Main Menu? (yes/no)\n")
             for input_attempt in range(5):
                 if input_attempt == 4:
                     print("Too many invalid entries. Program closing...")
-                    end_program = True
-                    restart_program = False
+                    end_program = 1
+                    restart_program = 0
                     return end_program, refresh_current_map_pop, restart_program
                 restart_program_input = input("> ").lower()
                 if restart_program_input in ["yes", "y", "ye"]:
-                    restart_program = True
-                    end_program = False
+                    restart_program = 1
+                    end_program = 0
                     return end_program, refresh_current_map_pop, restart_program
                 elif restart_program_input not in ["no", "n", "yes", "y", "ye"] and input_attempt <= 2:
                     print("\nInvalid entry. Would you like to go back to the Main Menu? (yes/no)\n")
@@ -117,15 +117,15 @@ def pull_API_data_again(end_program, refresh_current_map_pop, restart_program):
         elif user_input in ["yes", "y", "ye"] and attempt <= 3:
             print("\nRefreshing Current Population Map...\n")
             time.sleep(0.5)
-            refresh_current_map_pop = True
-            restart_program = False
+            refresh_current_map_pop = 1
+            restart_program = 0
             return end_program, refresh_current_map_pop, restart_program
 
 
 def logic_loops(data):
-    end_program = False
-    refresh_current_map_pop = False
-    restart_program = True
+    end_program = 0
+    refresh_current_map_pop = 0
+    restart_program = 1
     while not end_program:
         user_input = user_options()
         get_API_write_csv(data, user_input)
