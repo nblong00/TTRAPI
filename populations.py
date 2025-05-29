@@ -38,7 +38,7 @@ def user_options():
                 time.sleep(1)
                 exit()
             user_input = input("> ")
-            if user_input not in ["1", "2", "3"] and i < 4:
+            if user_input not in ["1", "2", "3"]:
                 print(f"\nInvalid input. {options}")
             else:
                 failed_input = False
@@ -52,6 +52,7 @@ def get_API_write_csv(data, user_input):
                      "Population",
                      "Status"]
     utils.create_CSV_for_data(column_names)
+    dataframe_map_name(user_input)
     for district in data["populationByDistrict"]:
         json_fields = []
         if user_input == "1":
@@ -70,6 +71,15 @@ def get_API_write_csv(data, user_input):
                         data["statusByDistrict"][district].title()]
         data_to_write = json_fields
         utils.write_data_to_CSV(data_to_write)
+
+
+def dataframe_map_name(user_input):
+    if user_input == "1":
+        print("All Districts Population Map:\n")
+    elif user_input == "2":
+        print("High Population District Map:\n")
+    elif user_input == "3":
+        print("Low Population District Map:\n")
 
 
 def pull_API_data_again(end_program, refresh_current_map_pop, restart_program):
