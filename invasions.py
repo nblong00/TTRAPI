@@ -68,24 +68,6 @@ def remaining_invasion_time(data, district):
         return time_remaining_in_invasion
 
 
-def error_checking_and_logging(response):
-    if response.status_code != 200:
-            logging.warning(f"{utils.dt()} - Response code received: {response.status_code}")
-            print(f"API responded with an unsuccessful {response.status_code} code.")
-    else:
-        logging.info(f"{utils.dt()} - Response code received: {response.status_code}")
-    try:
-        data = response.json()
-        logging.info(f"API data updated from central TTR server at " + 
-                    f"{utils.convert_epoch_timestamp_string(data, "lastUpdated")}")
-        return data
-    except requests.exceptions.JSONDecodeError:
-        logging.error(f"{utils.dt()} - API JSON may be malformed. " + 
-                    "We were unable to extract data from the response.")
-        input("Press ENTER to close program...")
-        exit()
-
-
 def pull_API_data_again(end_program):
     for attempt in range(5):
         if attempt == 4:
