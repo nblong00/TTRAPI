@@ -58,3 +58,12 @@ def error_checking_and_logging(url, endpoint):
                     "We were unable to extract data from the response.")
         input("Press ENTER to close program...")
         exit()
+
+
+def checking_if_error_is_active(data, ENDPOINT):
+    if data["error"] != None:
+        print("Error relayed via API.")
+        print("Documenting error in logs...")
+        logging.error(f"{ENDPOINT} {dt()} - API is reporting error in payload: {data["error"]}")
+        input("Press ENTER to close...")
+        exit()
