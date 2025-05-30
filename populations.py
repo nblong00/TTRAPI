@@ -5,6 +5,7 @@ import time
 URL = "https://www.toontownrewritten.com/api/population"
 ENDPOINT = "(POP)"
 
+
 def welcome(data):
     print("\n-Welcome to the ToonTown Rewritten (TTR) Population Map-")
     print(f"It is currently {utils.dt()}")
