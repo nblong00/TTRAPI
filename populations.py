@@ -3,7 +3,7 @@ import utils
 import time
 
 URL = "https://www.toontownrewritten.com/api/population"
-
+ENDPOINT = "(POP)"
 
 def welcome(data):
     print("\n-Welcome to the ToonTown Rewritten (TTR) Population Map-")
@@ -127,7 +127,7 @@ def logic_loops(data):
 
 
 def main():
-    data = utils.error_checking_and_logging(URL)
+    data = utils.error_checking_and_logging(URL, ENDPOINT)
     welcome(data)
     logic_loops(data)
     time.sleep(1.5)
