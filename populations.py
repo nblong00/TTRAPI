@@ -128,6 +128,7 @@ def logic_loops(data):
 
 def main():
     data = utils.error_checking_and_logging(URL, ENDPOINT)
+    utils.checking_if_error_is_active(data, ENDPOINT)
     welcome(data)
     logic_loops(data)
     time.sleep(1.5)
