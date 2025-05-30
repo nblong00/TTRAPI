@@ -1,9 +1,7 @@
 from dateutil import relativedelta
-import requests
 import pandas
 import utils
 import time
-import logging
 import datetime
 import math
 
