@@ -1,14 +1,8 @@
-import requests
 import pandas
 import utils
 import time
-import logging
 
-logging.basicConfig(filename="api.log", level=logging.INFO)
-url = "https://www.toontownrewritten.com/api/population"
-header = {"Content-Type":"application/json",
-        "Accept-Encoding":"deflate",
-        "User-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0) Gecko/20100101 Firefox/138.0"}
+URL = "https://www.toontownrewritten.com/api/population"
 
 
 def welcome(data):
@@ -16,12 +10,6 @@ def welcome(data):
     print(f"It is currently {utils.dt()}")
     print(f"Total population: {data['totalPopulation']} users")
     time.sleep(0.5)
-
-
-def api_get_call():
-    response = requests.get(url, headers=header)
-    data = response.json() 
-    return data
 
 
 def user_options():
@@ -53,22 +41,19 @@ def get_API_write_csv(data, user_input):
                      "Status"]
     utils.create_CSV_for_data(column_names)
     for district in data["populationByDistrict"]:
-        json_to_write = []
         if user_input == "1":
-            json_to_write = json_fields(data, district)
+            json_to_write(data, district)
         elif user_input == "2" and data["populationByDistrict"][district] >= 150:
-                json_to_write = json_fields(data, district)
+            json_to_write(data, district)
         elif user_input == "3" and data["populationByDistrict"][district] <= 150:
-                json_to_write = json_fields(data, district)
-        data_to_write = json_to_write
-        utils.write_data_to_CSV(data_to_write)
+            json_to_write(data, district)
 
 
-def json_fields(data, district):
-    json_fields = [district, 
+def json_to_write(data, district):
+    data_to_write = [district, 
                         str(data["populationByDistrict"][district]) + " Users",
                         data["statusByDistrict"][district].title()]
-    return json_fields
+    utils.write_data_to_CSV(data_to_write)
 
 
 def dataframe_map_name(user_input):
@@ -141,12 +126,8 @@ def logic_loops(data):
                 break
 
 
-def error_checking_and_logging():
-    pass
-
-
 def main():
-    data = api_get_call()
+    data = utils.error_checking_and_logging(URL)
     welcome(data)
     logic_loops(data)
     time.sleep(1.5)
