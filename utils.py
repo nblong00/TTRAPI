@@ -1,5 +1,9 @@
 import csv
 import datetime
+import requests
+import logging
+
+logging.basicConfig(filename="api.log", level=logging.INFO)
 
 
 def csv_new_line(csvfile):
@@ -32,3 +36,25 @@ def write_data_to_CSV(write_data):
         writer = csv.writer(csvfile, delimiter=",", lineterminator="")
         writer.writerow(write_data)
         csv_new_line(csvfile)
+
+
+def error_checking_and_logging(url):
+    header = {"Content-Type":"application/json",
+        "Accept-Encoding":"deflate",
+        "User-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0) Gecko/20100101 Firefox/138.0"}
+    response = requests.get(url, headers=header)
+    if response.status_code != 200:
+            logging.warning(f"{dt()} - Response code received: {response.status_code}")
+            print(f"API responded with an unsuccessful {response.status_code} code.")
+    else:
+        logging.info(f"{dt()} - Response code received: {response.status_code}")
+    try:
+        data = response.json()
+        logging.info(f"API data updated from central TTR server at " + 
+                    f"{convert_epoch_timestamp_string(data, "lastUpdated")}")
+        return data
+    except requests.exceptions.JSONDecodeError:
+        logging.error(f"{dt()} - API JSON may be malformed. " + 
+                    "We were unable to extract data from the response.")
+        input("Press ENTER to close program...")
+        exit()
