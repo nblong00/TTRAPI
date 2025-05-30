@@ -38,23 +38,23 @@ def write_data_to_CSV(write_data):
         csv_new_line(csvfile)
 
 
-def error_checking_and_logging(url):
+def error_checking_and_logging(url, endpoint):
     header = {"Content-Type":"application/json",
         "Accept-Encoding":"deflate",
         "User-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0) Gecko/20100101 Firefox/138.0"}
     response = requests.get(url, headers=header)
     if response.status_code != 200:
-            logging.warning(f"{dt()} - Response code received: {response.status_code}")
-            print(f"API responded with an unsuccessful {response.status_code} code.")
+            logging.warning(f"{endpoint} {dt()} - Response code received: {response.status_code}")
+            print(f"{endpoint} API responded with an unsuccessful {response.status_code} code.")
     else:
-        logging.info(f"{dt()} - Response code received: {response.status_code}")
+        logging.info(f"{endpoint} {dt()} -  Response code received: {response.status_code}")
     try:
         data = response.json()
-        logging.info(f"API data updated from central TTR server at " + 
+        logging.info(f"{endpoint} API data updated from central TTR server at " + 
                     f"{convert_epoch_timestamp_string(data, "lastUpdated")}")
         return data
     except requests.exceptions.JSONDecodeError:
-        logging.error(f"{dt()} - API JSON may be malformed. " + 
+        logging.error(f"{dt()} - {endpoint} API JSON may be malformed. " + 
                     "We were unable to extract data from the response.")
         input("Press ENTER to close program...")
         exit()
