@@ -90,11 +90,11 @@ def pull_API_data_again(end_program):
     for attempt in range(5):
         if attempt == 4:
             print("Too many invalid entries. Program closing...")
-            end_program = True
+            end_program = 1
             return end_program
         user_input = input("> ")
         if user_input.lower() in ["no", "n"]:
-            end_program = True
+            end_program = 1
             print("\nThank you for using the ToonTown Rewritten invasion scanner!")
             print("Program closing...")
             return end_program
@@ -103,7 +103,7 @@ def pull_API_data_again(end_program):
             continue
         elif user_input.lower() in ["yes", "y", "ye"] and attempt <= 3:
             print("\nPulling current invasions in ToonTown Rewritten...\n")
-            end_program = False
+            end_program = 0
             time.sleep(1)
             return end_program
 
@@ -119,7 +119,7 @@ def checking_if_error_is_active(data):
 
 
 def main():
-    end_program = False
+    end_program = 0
     welcome()
     while not end_program:
         data = utils.error_checking_and_logging(URL, ENDPOINT)
