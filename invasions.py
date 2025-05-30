@@ -7,11 +7,8 @@ import logging
 import datetime
 import math
 
-logging.basicConfig(filename="api.log", level=logging.INFO)
-url = "https://www.toontownrewritten.com/api/invasions"
-header = {"Content-Type":"application/json",
-        "Accept-Encoding":"deflate",
-        "User-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0) Gecko/20100101 Firefox/138.0"}
+URL = "https://www.toontownrewritten.com/api/invasions"
+ENDPOINT = "(INV)"
 
 
 def welcome():
@@ -125,15 +122,14 @@ def main():
     end_program = False
     welcome()
     while not end_program:
-        response = requests.get(url, headers=header)
-        data = error_checking_and_logging(response)
+        data = utils.error_checking_and_logging(URL, ENDPOINT)
         checking_if_error_is_active(data, end_program)
         sorting_for_CSV(data)
         result = pandas.read_csv("adjustedData.csv")
         print(result)
         print("\nDo you want to pull a new list of current invasions? (yes/no)")
         end_program = pull_API_data_again(end_program)
-    time.sleep(2)
+    time.sleep(1)
 
 
 main()
