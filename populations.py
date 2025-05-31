@@ -90,7 +90,7 @@ def pull_API_data_again(end_program, refresh_current_map_pop, restart_program):
                     end_program = 0
                     return end_program, refresh_current_map_pop, restart_program
                 elif restart_program_input not in ["no", "n", "yes", "y", "ye"] and input_attempt <= 2:
-                    print("\nInvalid entry. Would you like to go back to the Main Menu? (yes/no)\n")
+                    print("\nInvalid entry. Go back to the Main Menu? (yes/no)\n")
                     continue
                 elif restart_program_input in ["no", "n"]:
                     print("\nThank you for using the ToonTown Rewritten Population Map!")
@@ -98,7 +98,7 @@ def pull_API_data_again(end_program, refresh_current_map_pop, restart_program):
                     time.sleep(1.5)
                     exit()
         elif user_input not in ["no", "n", "yes", "y", "ye"] and attempt <= 2:
-            print("\nInvalid entry. Would you like to refresh the current population map? (yes/no)\n")
+            print("\nInvalid entry. Refresh the current population map? (yes/no)\n")
             continue
         elif user_input in ["yes", "y", "ye"] and attempt <= 3:
             print("\nRefreshing Current Population Map...\n")
@@ -120,9 +120,11 @@ def logic_loops(data):
             result = pandas.read_csv("adjustedData.csv")
             print(result)
             print("\nWould you like to refresh the current population map? (yes/no)\n")
-            end_program, refresh_current_map_pop, restart_program = pull_API_data_again(end_program,
-                                                                                        refresh_current_map_pop,
-                                                                                        restart_program)
+            end_program,
+            refresh_current_map_pop,
+            restart_program = pull_API_data_again(end_program,
+                                                refresh_current_map_pop,
+                                                restart_program)
             if restart_program or end_program:
                 break
 
