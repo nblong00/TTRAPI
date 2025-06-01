@@ -10,10 +10,8 @@ def logic_loop(data):
     for street in data["fieldOffices"]:
         street_name = ZONE_ID_LOOKUP[street]
         if data["fieldOffices"][street]["difficulty"] in range(1, 4):
-            difficulty_rating = f"{data["fieldOffices"][street]["difficulty"]} stars"
-            if data["fieldOffices"][street]["difficulty"] < 10:
-                # Explict double space
-                difficulty_rating = f"{data["fieldOffices"][street]["difficulty"]}  stars"
+            # Explict double space
+            difficulty_rating = f"{data["fieldOffices"][street]["difficulty"]}  stars"
         elif data["fieldOffices"][street]["difficulty"] == 0:
             difficulty_rating = "No stars"
         if data["fieldOffices"][street]["open"]:
@@ -22,6 +20,8 @@ def logic_loop(data):
             open_status = "No"
         if data["fieldOffices"][street]["annexes"] > 0:
             annexes_left = f"{data["fieldOffices"][street]["annexes"]} remaining"
+            if data["fieldOffices"][street]["annexes"] in range(1, 10):
+                annexes_left = f"{data["fieldOffices"][street]["annexes"]}  remaining"
         else:
             annexes_left = "Field Office closing"
         utils.write_data_to_CSV([street_name, difficulty_rating, open_status, annexes_left])
@@ -35,4 +35,4 @@ def main():
     print(result)
 
 
-main()    
+main()
