@@ -21,6 +21,7 @@ def logic_loop(data):
         if data["fieldOffices"][street]["annexes"] > 0:
             annexes_left = f"{data["fieldOffices"][street]["annexes"]} remaining"
             if data["fieldOffices"][street]["annexes"] in range(1, 10):
+                # Explict double space
                 annexes_left = f"{data["fieldOffices"][street]["annexes"]}  remaining"
         else:
             annexes_left = "Field Office closing"
