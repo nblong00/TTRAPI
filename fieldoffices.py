@@ -25,11 +25,11 @@ def logic_loop(data):
             annexes_left = "Field Office closing"
         utils.write_data_to_CSV([street_name, difficulty_rating, open_status, annexes_left])
 
-data = utils.error_checking_and_logging(URL, ENDPOINT)
-utils.create_CSV_for_data(["Location","Difficulty", "Open?", "Annexes"])
-logic_loop(data)
+
+def main():
+    data = utils.error_checking_and_logging(URL, ENDPOINT)
+    utils.create_CSV_for_data(["Location","Difficulty", "Open?", "Annexes"])
+    logic_loop(data)
 
 
-
-
-    
+main()    
