@@ -15,7 +15,7 @@ def logic_loop(data):
                 # Explict double space
                 difficulty_rating = f"{data["fieldOffices"][street]["difficulty"]}  stars"
         elif data["fieldOffices"][street]["difficulty"] == 0:
-            difficulty_rating = f"No stars"
+            difficulty_rating = "No stars"
         if data["fieldOffices"][street]["open"]:
             open_status = "Yes"
         elif not data["fieldOffices"][street]["open"]:
