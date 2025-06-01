@@ -50,12 +50,12 @@ def error_checking_and_logging(url, endpoint):
         logging.info(f"{endpoint} {dt()} -  Response code received: {response.status_code}")
     try:
         data = response.json()
-        logging.info(f"{endpoint} API data updated from central TTR server at " + 
-                    f"{convert_epoch_timestamp_string(data, "lastUpdated")}")
+        logging.info(f"{endpoint} API data updated from central TTR server at "
+                     + f"{convert_epoch_timestamp_string(data, "lastUpdated")}")
         return data
     except requests.exceptions.JSONDecodeError:
-        logging.error(f"{endpoint} {dt()} - API JSON may be malformed. " + 
-                    "We were unable to extract data from the response.")
+        logging.error(f"{endpoint} {dt()} - API JSON may be malformed. "
+                      + "We were unable to extract data from the response.")
         input("Press ENTER to close program...")
         exit()
 
