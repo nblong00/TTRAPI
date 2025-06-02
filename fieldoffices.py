@@ -7,6 +7,10 @@ ID_TO_NEIGHBORHOOD = {"3100":"The Brrrgh","3200":"The Brrrgh","3300":"The Brrrgh
 ENDPOINT = "(FOS)"
 
 
+def chart_title():
+    print(f"Field Office Locations & Status:\n")
+
+
 def logic_loop(data):
     for street in data["fieldOffices"]:
         street_name = ZONE_ID_LOOKUP[street]
@@ -33,6 +37,7 @@ def logic_loop(data):
 def main():
     data = utils.error_checking_and_logging(URL, ENDPOINT)
     utils.create_CSV_for_data(["Neighborhood", "Location", "Difficulty", "Open?", "Annexes"])
+    chart_title()
     logic_loop(data)
     result = pandas.read_csv("AdjustedData.csv")
     print(result)
