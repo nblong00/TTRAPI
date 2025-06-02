@@ -34,12 +34,20 @@ def logic_loop(data):
                 annexes_left = f"{data["fieldOffices"][street]["annexes"]}  remaining"
         else:
             annexes_left = "Field Office closing"
-        utils.write_data_to_CSV([neighborhood, street_name, difficulty_rating, open_status, annexes_left])
+        utils.write_data_to_CSV([neighborhood,
+                                 street_name,
+                                 difficulty_rating,
+                                 open_status,
+                                 annexes_left])
 
 
 def main():
     data = utils.error_checking_and_logging(URL, ENDPOINT)
-    utils.create_CSV_for_data(["Neighborhood", "Location", "Difficulty", "Open?", "Annexes"])
+    utils.create_CSV_for_data(["Neighborhood",
+                               "Location",
+                               "Difficulty",
+                               "Open?",
+                               "Annexes"])
     welcome()
     logic_loop(data)
     result = pandas.read_csv("AdjustedData.csv")
