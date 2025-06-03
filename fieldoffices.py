@@ -15,6 +15,7 @@ def welcome():
 
 
 def logic_loop(data):
+    print("Field Office Scan Results:\n")
     for street in data["fieldOffices"]:
         street_name = ZONE_ID_LOOKUP[street]
         neighborhood = ID_TO_NEIGHBORHOOD[street]
@@ -34,8 +35,8 @@ def logic_loop(data):
                 annexes_left = f"{data["fieldOffices"][street]["annexes"]}  remaining"
         else:
             annexes_left = "Field Office closing"
-        utils.write_data_to_CSV([neighborhood,
-                                 street_name,
+        utils.write_data_to_CSV([street_name,
+                                 neighborhood,
                                  difficulty_rating,
                                  open_status,
                                  annexes_left])
@@ -67,8 +68,8 @@ def pullin_API_data_again():
 def main():
     end_game = 0
     data = utils.error_checking_and_logging(URL, ENDPOINT)
-    utils.create_CSV_for_data(["Neighborhood",
-                               "Location",
+    utils.create_CSV_for_data(["Location",
+                               "Neighborhood",
                                "Difficulty",
                                "Open?",
                                "Annexes"])
