@@ -67,14 +67,15 @@ def pullin_API_data_again():
 
 def main():
     end_game = 0
-    data = utils.error_checking_and_logging(URL, ENDPOINT)
-    utils.create_CSV_for_data(["Location",
-                               "Neighborhood",
-                               "Difficulty",
-                               "Open?",
-                               "Annexes"])
     welcome()
     while not end_game:
+        data = utils.error_checking_and_logging(URL, ENDPOINT)
+        utils.error_checking_and_logging(URL, ENDPOINT)
+        utils.create_CSV_for_data(["Location",
+                                "Neighborhood",
+                                "Difficulty",
+                                "Open?",
+                                "Annexes"])
         logic_loop(data)
         result = pandas.read_csv("AdjustedData.csv")
         print(result)
