@@ -41,7 +41,31 @@ def logic_loop(data):
                                  annexes_left])
 
 
+def pullin_API_data_again():
+    print("\nRefresh Field Office Scanner data? (yes/no)")
+    for attempt in range(5):
+        if attempt == 4:
+            print("Too many invalid entries. Program closing...")
+            end_program = 1
+            return end_program
+        user_input = input("> ")
+        if user_input.lower() in ["no", "n"]:
+            end_program = 1
+            print("\nThank you for using the ToonTown Rewritten Field Office Scanner!")
+            print("Program closing...")
+            return end_program
+        elif user_input.lower() not in ["no", "n", "yes", "y", "ye"] and attempt <= 2:
+            print("Invalid entry. Would you like to run the Field Office Scanner again? (yes/no)")
+            continue
+        elif user_input.lower() in ["yes", "y", "ye"] and attempt <= 3:
+            print("\nRunning Field Office Scanner in ToonTown Rewritten...\n")
+            end_program = 0
+            time.sleep(1)
+            return end_program
+
+
 def main():
+    end_game = 0
     data = utils.error_checking_and_logging(URL, ENDPOINT)
     utils.create_CSV_for_data(["Neighborhood",
                                "Location",
@@ -49,9 +73,11 @@ def main():
                                "Open?",
                                "Annexes"])
     welcome()
-    logic_loop(data)
-    result = pandas.read_csv("AdjustedData.csv")
-    print(result)
+    while not end_game:
+        logic_loop(data)
+        result = pandas.read_csv("AdjustedData.csv")
+        print(result)
+        end_game = pullin_API_data_again()
 
 
 main()
