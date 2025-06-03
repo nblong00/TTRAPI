@@ -6,10 +6,11 @@ import fieldoffices
 
 def menu_options():
     failed_input = 1
-    options = ("\nEnter one of the below number options:" +
-              "\n1 - See active district populations" + 
-              "\n2 - See active invasions" +
-              "\n3 - See active field offices\n")
+    options = ("\nEnter one of the below number options:"
+              + "\n1 - See active district populations" 
+              + "\n2 - See active invasions"
+              + "\n3 - See active field offices"
+              + "\n4 - EXIT APP")
     print(options)
     while failed_input:
         for attempt in range(5):
@@ -18,7 +19,7 @@ def menu_options():
                 time.sleep(1)
                 exit()
             user_input = input("> ")
-            if user_input not in ["1", "2", "3"]:
+            if user_input not in ["1", "2", "3", "4"]:
                 print(f"\nInvalid input. {options}")
             else:
                 failed_input = 0
@@ -36,5 +37,8 @@ def menu():
         invasions.main()
     elif user_input == "3":
         fieldoffices.main()
+    elif user_input == "4":
+        print("Thank you for using the ToonTown Rewritten App."
+              + "\nProgram closing...")
 
 menu()
