@@ -29,19 +29,21 @@ def menu_options():
 
 
 def menu():
-    print("Welcome to the ToonTown Rewritten App.\n")
-    user_input = menu_options()
-    while user_input:
-        if user_input == "1":
-            populations.main()
-        elif user_input == "2":
-            invasions.main()
-        elif user_input == "3":
-            fieldoffices.main()
-        elif user_input == "4":
-            print("Thank you for using the ToonTown Rewritten App."
-                + "\nProgram closing...")
-            time.sleep(0.5)
-            break
+        continue_running = 1
+        while continue_running:
+            print("\nWelcome to the ToonTown Rewritten App.\n")
+            user_input = menu_options()
+            if user_input == "1":
+                populations.main()
+            elif user_input == "2":
+                invasions.main()
+            elif user_input == "3":
+                fieldoffices.main()
+            elif user_input == "4":
+                print("Thank you for using the ToonTown Rewritten App."
+                    + "\nProgram closing...")
+                time.sleep(0.5)
+                exit()
+
 
 menu()
