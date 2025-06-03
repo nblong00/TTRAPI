@@ -15,7 +15,7 @@ def welcome(data):
 
 def user_options():
     failed_input = 1
-    options = ("\nEnter one of the below number options:" +
+    options = ("Enter one of the below number options:" +
               "\n1 - See all district populations" + 
               "\n2 - See only high population districts" +
               "\n3 - See only low population districts\n")
@@ -112,8 +112,6 @@ def logic_loops(data):
     refresh_current_map_pop = 0
     restart_program = 1
     while not end_program:
-        print(refresh_current_map_pop)
-        print(restart_program)
         user_input = user_options()
         get_API_write_csv(data, user_input)
         while refresh_current_map_pop or restart_program:
