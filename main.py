@@ -6,7 +6,7 @@ import fieldoffices
 
 def menu_options():
     failed_input = 1
-    options = ("\nEnter one of the below number options:"
+    options = ("Enter one of the below number options:"
               + "\n1 - See active district populations" 
               + "\n2 - See active invasions"
               + "\n3 - See active field offices"
