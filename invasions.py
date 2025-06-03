@@ -102,6 +102,3 @@ def main():
         print("\nDo you want to pull a new list of current invasions? (yes/no)")
         end_program = pull_API_data_again(end_program)
     time.sleep(1)
-
-
-main()

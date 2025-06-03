@@ -135,6 +135,3 @@ def main():
     welcome(data)
     logic_loops(data)
     time.sleep(1.5)
-
-
-main()

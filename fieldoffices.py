@@ -80,6 +80,3 @@ def main():
         result = pandas.read_csv("AdjustedData.csv")
         print(result)
         end_game = pullin_API_data_again()
-
-
-main()
