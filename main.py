@@ -10,7 +10,7 @@ def menu_options():
               + "\n1 - See active district populations" 
               + "\n2 - See active invasions"
               + "\n3 - See active field offices"
-              + "\n4 - EXIT APP")
+              + "\n4 - EXIT APP\n")
     print(options)
     while failed_input:
         for attempt in range(5):
