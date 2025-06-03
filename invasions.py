@@ -53,7 +53,7 @@ def remaining_invasion_time(data, district):
         invasion_end_time = (converted_starting_timestamp
                             + datetime.timedelta(minutes = minutes_left))
     diff_now_end = relativedelta.relativedelta(invasion_end_time, 
-                                                                    datetime.datetime.now())
+                                               datetime.datetime.now())
     if diff_now_end.hours >= 1:
         time_in_invasion = f"{diff_now_end.hours} hour {diff_now_end.minutes} minutes"
         if diff_now_end.minutes in range(10):
