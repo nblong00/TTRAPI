@@ -101,7 +101,7 @@ def pull_API_data_again(end_program, refresh_current_map_pop, restart_program):
             continue
         elif user_input in ["yes", "y", "ye"] and attempt <= 3:
             print("\nRefreshing Current Population Map...\n")
-            time.sleep(0.5)
+            time.sleep(1)
             refresh_current_map_pop = 1
             restart_program = 0
             return end_program, refresh_current_map_pop, restart_program
@@ -133,4 +133,4 @@ def main():
     utils.checking_if_error_is_active(data, ENDPOINT)
     welcome(data)
     logic_loops(data)
-    time.sleep(0.5)
+    time.sleep(1)
