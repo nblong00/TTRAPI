@@ -26,7 +26,7 @@ def user_options():
                 print("Too many invalid entries. Program exiting...")
                 time.sleep(1)
                 exit()
-            user_input = input("> ")
+            user_input = input("> ").lower()
             if user_input not in ["1", "2", "3"]:
                 print(f"\nInvalid input. {options}")
             else:
