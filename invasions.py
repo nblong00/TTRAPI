@@ -85,7 +85,7 @@ def pull_API_data_again(end_program):
         elif user_input.lower() in ["yes", "y", "ye"] and attempt <= 3:
             print("\nPulling current invasions in ToonTown Rewritten...\n")
             end_program = 0
-            time.sleep(1)
+            time.sleep(0.5)
             return end_program
 
 
