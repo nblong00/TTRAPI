@@ -14,7 +14,8 @@ def csv_new_line(csvfile):
 
 def dt():
     current_dt = datetime.datetime.now()
-    dt_string = datetime.datetime.strftime(current_dt, "%I:%M%p on %m-%d-%Y")
+    dt_string = datetime.datetime.strftime(current_dt,
+                                           "%I:%M%p on %m-%d-%Y")
     return dt_string
 
 
