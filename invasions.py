@@ -10,7 +10,7 @@ ENDPOINT = "(INV)"
 
 
 def welcome():
-    print("\n-Welcome to the ToonTown Rewritten (TTR) Invasion Scanner-")
+    print("-Welcome to the ToonTown Rewritten (TTR) Invasion Scanner-")
     print(f"It is currently {utils.dt()}\n")
     time.sleep(0.5)
 
@@ -71,14 +71,13 @@ def remaining_invasion_time(data, district):
 def pull_API_data_again(end_program):
     for attempt in range(5):
         if attempt == 4:
-            print("Too many invalid entries. Program closing...")
+            print("Too many invalid entries. Going back to Main Menu...")
             end_program = 1
             return end_program
-        user_input = input("> ")
+        user_input = input("> ").lower()
         if user_input.lower() in ["no", "n"]:
             end_program = 1
-            print("\nThank you for using the ToonTown Rewritten invasion scanner!")
-            print("Program closing...")
+            print("\nExiting Invasion Scanner...")
             return end_program
         elif user_input.lower() not in ["no", "n", "yes", "y", "ye"] and attempt <= 2:
             print("Invalid entry. Would you like to check for new invasions? (yes/no)")
