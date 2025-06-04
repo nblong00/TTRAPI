@@ -9,7 +9,7 @@ ENDPOINT = "(FOS)"
 
 
 def welcome():
-    print("\n-Welcome to the ToonTown Rewritten (TTR) Field Office Tracker-")
+    print("-Welcome to the ToonTown Rewritten (TTR) Field Office Tracker-")
     print(f"It is currently {utils.dt()}\n")
     time.sleep(0.5)
 
@@ -52,8 +52,8 @@ def pullin_API_data_again():
         user_input = input("> ")
         if user_input.lower() in ["no", "n"]:
             end_program = 1
-            print("\nThank you for using the ToonTown Rewritten Field Office Scanner!")
-            print("Program closing...")
+            print("\nExiting Field Office Scanner...")
+            time.sleep(1)
             return end_program
         elif user_input.lower() not in ["no", "n", "yes", "y", "ye"] and attempt <= 2:
             print("Invalid entry. Would you like to run the Field Office Scanner again? (yes/no)")
