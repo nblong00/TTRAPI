@@ -93,7 +93,7 @@ def pull_API_data_again(end_program, refresh_current_map_pop, restart_program):
                     print("\nInvalid entry. Go back to the Populations submenu? (yes/no)\n")
                     continue
                 elif restart_program_input in ["no", "n"]:
-                    print("\nThank you for using the ToonTown Rewritten Population Map!")
+                    print("\nExiting Population Map...")
                     restart_program = 0 
                     return end_program, refresh_current_map_pop, restart_program
         elif user_input not in ["no", "n", "yes", "y", "ye"] and attempt <= 2:
