@@ -79,10 +79,10 @@ def pull_API_data_again(end_program):
             end_program = 1
             print("\nExiting Invasion Scanner...")
             return end_program
-        elif user_input.lower() not in ["no", "n", "yes", "y", "ye"] and attempt <= 2:
+        elif user_input not in ["no", "n", "yes", "y", "ye"] and attempt <= 2:
             print("Invalid entry. Would you like to check for new invasions? (yes/no)")
             continue
-        elif user_input.lower() in ["yes", "y", "ye"] and attempt <= 3:
+        elif user_input in ["yes", "y", "ye"] and attempt <= 3:
             print("\nPulling current invasions in ToonTown Rewritten...\n")
             end_program = 0
             time.sleep(1)
