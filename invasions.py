@@ -30,6 +30,7 @@ def sorting_for_CSV(data):
                             data["invasions"][district]["progress"],
                             remaining_invasion_time(data, district)]
             utils.write_data_to_CSV(data_to_write)
+    print("Invasion Scanner Results:\n")
 
 
 def remaining_invasion_time(data, district):
