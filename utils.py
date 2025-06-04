@@ -20,7 +20,8 @@ def dt():
 
 def convert_epoch_timestamp_string(data, lastUpdated):
     converted_epoch_timestamp = datetime.datetime.fromtimestamp(data[lastUpdated])
-    dt_string = datetime.datetime.strftime(converted_epoch_timestamp, "%I:%M%p on %m-%d-%Y")
+    dt_string = datetime.datetime.strftime(converted_epoch_timestamp,
+                                           "%I:%M%p on %m-%d-%Y")
     return dt_string
 
 
@@ -44,10 +45,13 @@ def error_checking_and_logging(url, endpoint):
         "User-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0) Gecko/20100101 Firefox/138.0"}
     response = requests.get(url, headers=header)
     if response.status_code != 200:
-            logging.warning(f"{endpoint} {dt()} - Response code received: {response.status_code}")
-            print(f"{endpoint} API responded with an unsuccessful {response.status_code} code.")
+            logging.warning(f"{endpoint} {dt()} - Response "
+                            + f"code received: {response.status_code}")
+            print(f"{endpoint} API responded with an "
+                  + f"unsuccessful {response.status_code} code.")
     else:
-        logging.info(f"{endpoint} {dt()} -  Response code received: {response.status_code}")
+        logging.info(f"{endpoint} {dt()} -  Response code "
+                     + f"received: {response.status_code}")
     try:
         data = response.json()
         logging.info(f"{endpoint} API data updated from central TTR server at "
@@ -63,6 +67,7 @@ def checking_if_error_is_active(data, endpoint):
     if data["error"] != None:
         print("Error relayed via API.")
         print("Documenting error in logs...")
-        logging.error(f"{endpoint} {dt()} - API is reporting error in payload: {data["error"]}")
+        logging.error(f"{endpoint} {dt()} - API is reporting error "
+                      + f"in payload: {data["error"]}")
         input("Press ENTER to close...")
         exit()
