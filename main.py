@@ -42,7 +42,7 @@ def menu():
             elif user_input == "4":
                 print("Thank you for using the ToonTown Rewritten App."
                     + "\nProgram closing...")
-                time.sleep(0.5)
+                time.sleep(1)
                 exit()
 
 
