@@ -55,7 +55,8 @@ def error_checking_and_logging(url, endpoint):
                      + f"received: {response.status_code}")
     try:
         data = response.json()
-        logging.info(f"{endpoint} API data updated from central TTR server at "
+        if endpoint != "(SIM)":
+            logging.info(f"{endpoint} API data updated from central TTR server at "
                      + f"{convert_epoch_timestamp_string(data, "lastUpdated")}")
         return data
     except requests.exceptions.JSONDecodeError:
