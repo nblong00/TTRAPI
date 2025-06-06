@@ -6,3 +6,4 @@ ENDPOINT = "(SIM)"
 
 data = utils.error_checking_and_logging(URL, ENDPOINT)
 print(data)
+utils.create_CSV_for_data(["State", "Winner", "RewardDescription", "ProjectedEndTime"])
