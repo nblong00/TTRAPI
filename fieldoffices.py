@@ -19,9 +19,12 @@ def logic_loop(data):
     for street in data["fieldOffices"]:
         street_name = ZONE_ID_LOOKUP[street]
         neighborhood = ID_TO_NEIGHBORHOOD[street]
-        if data["fieldOffices"][street]["difficulty"] in range(1, 4):
+        if data["fieldOffices"][street]["difficulty"] in range(2, 4):
             # Explict double space
             difficulty_rating = f"{data["fieldOffices"][street]["difficulty"]}  stars"
+        elif data["fieldOffices"][street]["difficulty"] == 1:
+            # Explict double space & space at end of string
+            difficulty_rating = f"{data["fieldOffices"][street]["difficulty"]}  star "
         elif data["fieldOffices"][street]["difficulty"] == 0:
             difficulty_rating = "No stars"
         if data["fieldOffices"][street]["open"]:
