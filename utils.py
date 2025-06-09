@@ -26,14 +26,14 @@ def convert_epoch_timestamp_string(data, lastUpdated):
     return dt_string
 
 
-def create_CSV_for_data(column_names):
+def create_csv_for_data(column_names):
     with open("adjustedData.csv", "w+", newline="") as csvfile:
         writer = csv.writer(csvfile, delimiter=",", lineterminator="")
         writer.writerow(column_names)
         csv_new_line(csvfile)
 
 
-def write_data_to_CSV(write_data):
+def write_data_to_csv(write_data):
     with open("adjustedData.csv", "a+", newline="") as csvfile:
         writer = csv.writer(csvfile, delimiter=",", lineterminator="")
         writer.writerow(write_data)
