@@ -31,8 +31,7 @@ def menu_options():
 
 
 def menu():
-        continue_running = 1
-        while continue_running:
+        while 1 > 0:
             print("\nWelcome to the ToonTown Rewritten App.\n")
             user_input = menu_options()
             if user_input == "1":
