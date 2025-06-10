@@ -1,10 +1,8 @@
 import utils
 import time
-import pandas
 
 URL = "https://www.toontownrewritten.com/api/sillymeter"
 ENDPOINT = "(SIM)"
-
 
 
 def main():
@@ -23,10 +21,8 @@ def main():
         # print(data)
 
 
-
 def current_rewards(data):
     i = 0
     for reward in data["rewards"]:
         print(reward + " | " + data["rewardDescriptions"][i])
         i += 1
-        
