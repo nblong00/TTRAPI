@@ -26,8 +26,7 @@ def timestamp_conversions(data):
     print(return_statement)
 
 
-def main():
-    data = utils.error_checking_and_logging(URL, ENDPOINT)
+def logic_loop(data):
     if data["state"] == "Inactive":
         print("=================================")
         print("\nSilly Meter not currently active!\n")
@@ -50,3 +49,8 @@ def current_rewards(data):
     for reward in data["rewards"]:
         print(reward + " | " + data["rewardDescriptions"][i])
         i += 1
+
+
+def main():
+    data = utils.error_checking_and_logging(URL, ENDPOINT)
+    logic_loop(data)
