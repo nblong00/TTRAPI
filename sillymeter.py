@@ -7,9 +7,11 @@ ENDPOINT = "(SIM)"
 
 def main():
     data = utils.error_checking_and_logging(URL, ENDPOINT)
+    dt = utils.convert_epoch_timestamp_string(data, "nextUpdateTimestamp")
     if data["state"] == "Inactive":
         print("=================================")
         print("\nSilly Meter not currently active!\n")
+        print(f"Silly Meter will become active at {dt}!\n")
         print("=================================")
         time.sleep(0.5)
     elif data["state"] == "Active" and data['winner'] == None:
@@ -18,6 +20,7 @@ def main():
         print("Potential Rewards & Descriptions:")
         print("=================================\n")
         current_rewards(data)
+        print(f"\nSilly Points will be updated at {dt}!\n")
         # print(data)
 
 
