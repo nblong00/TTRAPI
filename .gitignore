@@ -1,0 +1,6 @@
+api.log
+datafile.json
+ToDo.txt
+__pycache__
+myapp_env
+adjustedData.csv
