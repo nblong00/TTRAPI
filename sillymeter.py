@@ -32,6 +32,7 @@ def update_silly_meter_status():
         time.sleep(0.5)
         return 0
     elif refresh_status in ["no", "n"]:
+        time.sleep(0.5)
         return 1
 
 
