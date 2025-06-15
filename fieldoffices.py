@@ -38,7 +38,7 @@ def logic_loop(data):
                 annexes_left = f"{data["fieldOffices"][street]["annexes"]}  remaining"
         else:
             annexes_left = "Field Office closing"
-        utils.write_data_to_CSV([street_name,
+        utils.write_data_to_csv([street_name,
                                  neighborhood,
                                  difficulty_rating,
                                  open_status,
@@ -74,7 +74,7 @@ def main():
     while not end_game:
         data = utils.error_checking_and_logging(URL, ENDPOINT)
         utils.error_checking_and_logging(URL, ENDPOINT)
-        utils.create_CSV_for_data(["Location",
+        utils.create_csv_for_data(["Location",
                                 "Neighborhood",
                                 "Difficulty",
                                 "Open?",

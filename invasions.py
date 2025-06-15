@@ -15,9 +15,9 @@ def welcome():
     time.sleep(0.5)
 
 
-def sorting_for_CSV(data):
+def sorting_for_csv(data):
     column_names = ["DistrictName", "Type", "Progress", "InvasionTimeoutIn"]
-    utils.create_CSV_for_data(column_names)
+    utils.create_csv_for_data(column_names)
     for district in data["invasions"]:
             if "Tele\u0003marketer" in data["invasions"][district]["type"]:
                 data["invasions"][district]["type"] = "Telemarketer" 
@@ -29,7 +29,7 @@ def sorting_for_CSV(data):
                             data["invasions"][district]["type"],
                             data["invasions"][district]["progress"],
                             remaining_invasion_time(data, district)]
-            utils.write_data_to_CSV(data_to_write)
+            utils.write_data_to_csv(data_to_write)
     print("Invasion Scanner Results:\n")
 
 
@@ -96,7 +96,7 @@ def main():
     while not end_program:
         data = utils.error_checking_and_logging(URL, ENDPOINT)
         utils.checking_if_error_is_active(data, ENDPOINT)
-        sorting_for_CSV(data)
+        sorting_for_csv(data)
         result = pandas.read_csv("adjustedData.csv")
         print(result)
         print("\nDo you want to pull a new list of current invasions? (yes/no)")

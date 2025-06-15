@@ -40,7 +40,7 @@ def get_API_write_csv(data, user_input):
     column_names = ["DistrictName",
                      "Population",
                      "Status"]
-    utils.create_CSV_for_data(column_names)
+    utils.create_csv_for_data(column_names)
     for district in data["populationByDistrict"]:
         if user_input == "1":
             json_to_write(data, district)
@@ -54,7 +54,7 @@ def json_to_write(data, district):
     data_to_write = [district, 
                         str(data["populationByDistrict"][district]) + " Users",
                         data["statusByDistrict"][district].title()]
-    utils.write_data_to_CSV(data_to_write)
+    utils.write_data_to_csv(data_to_write)
 
 
 def dataframe_map_name(user_input):
