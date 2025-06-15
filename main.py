@@ -26,7 +26,6 @@ def menu_options():
             else:
                 failed_input = 0
                 break
-    print()
     return user_input
 
 
