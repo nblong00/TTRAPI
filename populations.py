@@ -7,7 +7,7 @@ ENDPOINT = "(POP)"
 
 
 def welcome(data):
-    print("-Welcome to the ToonTown Rewritten (TTR) Population Map-")
+    print("\n-Welcome to the ToonTown Rewritten (TTR) Population Map-")
     print(f"It is currently {utils.dt()}")
     print(f"Total population: {data['totalPopulation']} users")
     time.sleep(0.5)

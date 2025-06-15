@@ -9,7 +9,7 @@ ENDPOINT = "(FOS)"
 
 
 def welcome():
-    print("-Welcome to the ToonTown Rewritten (TTR) Field Office Tracker-")
+    print("\n-Welcome to the ToonTown Rewritten (TTR) Field Office Tracker-")
     print(f"It is currently {utils.dt()}\n")
     time.sleep(0.5)
 

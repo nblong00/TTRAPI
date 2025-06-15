@@ -10,7 +10,7 @@ ENDPOINT = "(INV)"
 
 
 def welcome():
-    print("-Welcome to the ToonTown Rewritten (TTR) Invasion Scanner-")
+    print("\n-Welcome to the ToonTown Rewritten (TTR) Invasion Scanner-")
     print(f"It is currently {utils.dt()}\n")
     time.sleep(0.5)
 
