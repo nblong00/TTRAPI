@@ -107,7 +107,7 @@ def pull_API_data_again(end_program, refresh_current_map_pop, restart_program):
             return end_program, refresh_current_map_pop, restart_program
 
 
-def logic_loops(data):
+def main_logic_loops(data):
     end_program = 0
     refresh_current_map_pop = 0
     restart_program = 1
@@ -132,5 +132,5 @@ def main():
     data = utils.error_checking_and_logging(URL, ENDPOINT)
     utils.checking_if_error_is_active(data, ENDPOINT)
     welcome(data)
-    logic_loops(data)
+    main_logic_loops(data)
     time.sleep(1)

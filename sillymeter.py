@@ -36,7 +36,7 @@ def update_silly_meter_status():
         return 1
 
 
-def logic_loop(data):
+def main_logic_loop(data):
     end = 0
     while end == 0:
         if data["state"] == "Inactive":
@@ -65,4 +65,4 @@ def current_rewards(data):
 
 def main():
     data = utils.error_checking_and_logging(URL, ENDPOINT)
-    logic_loop(data)
+    main_logic_loop(data)

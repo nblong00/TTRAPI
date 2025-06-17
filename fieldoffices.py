@@ -14,7 +14,7 @@ def welcome():
     time.sleep(0.5)
 
 
-def logic_loop(data):
+def main_logic_loop(data):
     print("Field Office Scan Results:\n")
     for street in data["fieldOffices"]:
         street_name = ZONE_ID_LOOKUP[street]
@@ -79,7 +79,7 @@ def main():
                                 "Difficulty",
                                 "Open?",
                                 "Annexes"])
-        logic_loop(data)
+        main_logic_loop(data)
         result = pandas.read_csv("AdjustedData.csv")
         print(result)
         end_game = pullin_API_data_again()
