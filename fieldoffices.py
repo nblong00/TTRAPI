@@ -16,26 +16,25 @@ def welcome():
 
 def main_logic_loop(data):
     print("Field Office Scan Results:\n")
-    for street in data["fieldOffices"]:
+    for street in data['fieldOffices']:
+        difficulty_rating = data['fieldOffices'][street]['difficulty'] + 1
         street_name = ZONE_ID_LOOKUP[street]
         neighborhood = ID_TO_NEIGHBORHOOD[street]
-        if data["fieldOffices"][street]["difficulty"] in range(2, 4):
+        if data['fieldOffices'][street]['difficulty'] in range(1, 4):
             # Explict double space
-            difficulty_rating = f"{data["fieldOffices"][street]["difficulty"]}  stars"
-        elif data["fieldOffices"][street]["difficulty"] == 1:
+            difficulty_rating = f"{difficulty_rating}  stars"
+        elif data['fieldOffices'][street]['difficulty'] == 0:
             # Explict double space & space at end of string
-            difficulty_rating = f"{data["fieldOffices"][street]["difficulty"]}  star "
-        elif data["fieldOffices"][street]["difficulty"] == 0:
-            difficulty_rating = "No stars"
-        if data["fieldOffices"][street]["open"]:
+            difficulty_rating = "1  star "
+        if data['fieldOffices'][street]['open']:
             open_status = "Yes"
-        elif not data["fieldOffices"][street]["open"]:
+        elif not data['fieldOffices'][street]['open']:
             open_status = "No"
-        if data["fieldOffices"][street]["annexes"] > 0:
-            annexes_left = f"{data["fieldOffices"][street]["annexes"]} remaining"
-            if data["fieldOffices"][street]["annexes"] in range(1, 10):
+        if data['fieldOffices'][street]['annexes'] > 0:
+            annexes_left = f"{data['fieldOffices'][street]['annexes']} remaining"
+            if data['fieldOffices'][street]['annexes'] in range(1, 10):
                 # Explict double space
-                annexes_left = f"{data["fieldOffices"][street]["annexes"]}  remaining"
+                annexes_left = f"{data['fieldOffices'][street]['annexes']}  remaining"
         else:
             annexes_left = "Field Office closing"
         utils.write_data_to_csv([street_name,
