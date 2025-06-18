@@ -53,7 +53,7 @@ def error_checking_and_logging(url, endpoint):
     try:
         data = response.json()
         if endpoint != "(SIM)":
-            logging.info(f"{endpoint} API data updated from central TTR server at {convert_epoch_timestamp_string(data, "lastUpdated")}")
+            logging.info(f"{endpoint} API data updated from central TTR server at {convert_epoch_timestamp_string(data, 'lastUpdated')}")
         return data
     except requests.exceptions.JSONDecodeError:
         logging.error(f"{endpoint} {dt()} - API JSON may be malformed. We were unable to extract data from the response.")
@@ -64,6 +64,6 @@ def checking_if_error_is_active(data, endpoint):
     if data["error"] != None:
         print("Error relayed via API.")
         print("Documenting error in logs...")
-        logging.error(f"{endpoint} {dt()} - API is reporting error in payload: {data["error"]}")
+        logging.error(f"{endpoint} {dt()} - API is reporting error in payload: {data['error']}")
         input("Press ENTER to close...")
         exit()
