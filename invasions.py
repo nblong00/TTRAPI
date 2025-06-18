@@ -19,23 +19,23 @@ def sorting_for_csv(data):
     column_names = ["DistrictName", "Type", "Progress", "InvasionTimeoutIn"]
     utils.create_csv_for_data(column_names)
     for district in data["invasions"]:
-            if "Tele\u0003marketer" in data["invasions"][district]["type"]:
-                data["invasions"][district]["type"] = "Telemarketer" 
-            elif "Micro\u0003manager" in data["invasions"][district]["type"]:
-                data["invasions"][district]["type"] = "Micromanager"
-            elif "Blood\u0003sucker" in data["invasions"][district]["type"]:
-                data["invasions"][district]["type"] = "Bloodsucker"
+            if "Tele\u0003marketer" in data['invasions'][district]['type']:
+                data['invasions'][district]['type'] = "Telemarketer" 
+            elif "Micro\u0003manager" in data['invasions'][district]['type']:
+                data['invasions'][district]['type'] = "Micromanager"
+            elif "Blood\u0003sucker" in data['invasions'][district]['type']:
+                data['invasions'][district]['type'] = "Bloodsucker"
             data_to_write = [district, 
-                            data["invasions"][district]["type"],
-                            data["invasions"][district]["progress"],
+                            data['invasions'][district]['type'],
+                            data['invasions'][district]['progress'],
                             remaining_invasion_time(data, district)]
             utils.write_data_to_csv(data_to_write)
     print("Invasion Scanner Results:\n")
 
 
 def remaining_invasion_time(data, district):
-    converted_starting_timestamp = (datetime.datetime.fromtimestamp(data["invasions"][district]["startTimestamp"]))
-    max_progress_value = int(data["invasions"][district]["progress"].split("/")[1])
+    converted_starting_timestamp = (datetime.datetime.fromtimestamp(data['invasions'][district]['startTimestamp']))
+    max_progress_value = int(data['invasions'][district]['progress'].split("/")[1])
     allowed_invasion_time = math.ceil((max_progress_value * 0.7) / 60)
     hours_left = 0
     minutes_left = 0
@@ -45,7 +45,7 @@ def remaining_invasion_time(data, district):
         # Accounting for Mega-Invasions (time based)
         if max_progress_value == 1000000:
             hours_left = 3
-            data["invasions"][district]["progress"] = "-Mega-Invasion-"
+            data['invasions'][district]['progress'] = "-Mega-Invasion-"
         invasion_end_time = (converted_starting_timestamp
                             + datetime.timedelta(hours = hours_left, 
                                                 minutes = minutes_left))
