@@ -19,7 +19,7 @@ def dt():
     return dt_string
 
 
-def convert_epoch_timestamp_string(data, lastUpdated):
+def convert_epoch_timestamp_string(data):
     converted_epoch_timestamp = datetime.datetime.fromtimestamp(data['lastUpdated'])
     dt_string = datetime.datetime.strftime(converted_epoch_timestamp,
                                            "%I:%M%p on %m-%d-%Y")
@@ -57,7 +57,7 @@ def error_checking_and_logging(url, endpoint):
         data = response.json()
         if endpoint != "(SIM)":
             logging.info(f"{endpoint} API data updated from central TTR server at "
-                         +  f"{convert_epoch_timestamp_string(data, 'lastUpdated')}")
+                         +  f"{convert_epoch_timestamp_string(data)}")
         return data
     except requests.exceptions.JSONDecodeError:
         logging.error(f"{endpoint} {dt()} - API JSON may be malformed. "
