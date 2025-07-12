@@ -6,41 +6,41 @@ import logging
 logging.basicConfig(filename="api.log", level=logging.INFO)
 
 
-def csv_new_line(csvfile):
+def csv_new_line(csvfile: complex) -> None:
     lastchar = csvfile.read(1)
     if lastchar != "\n":
         csvfile.write("\n")
 
 
-def dt():
+def dt() -> str:
     current_dt = datetime.datetime.now()
     dt_string = datetime.datetime.strftime(current_dt,
                                            "%I:%M%p on %m-%d-%Y")
     return dt_string
 
 
-def convert_epoch_timestamp_string(data):
+def convert_epoch_timestamp_string(data: complex) -> str:
     converted_epoch_timestamp = datetime.datetime.fromtimestamp(data['lastUpdated'])
     dt_string = datetime.datetime.strftime(converted_epoch_timestamp,
                                            "%I:%M%p on %m-%d-%Y")
     return dt_string
 
 
-def create_csv_for_data(column_names):
+def create_csv_for_data(column_names: list[str]) -> None:
     with open("adjustedData.csv", "w+", newline="") as csvfile:
         writer = csv.writer(csvfile, delimiter=",", lineterminator="")
         writer.writerow(column_names)
         csv_new_line(csvfile)
 
 
-def write_data_to_csv(write_data):
+def write_data_to_csv(write_data: complex) -> None:
     with open("adjustedData.csv", "a+", newline="") as csvfile:
         writer = csv.writer(csvfile, delimiter=",", lineterminator="")
         writer.writerow(write_data)
         csv_new_line(csvfile)
 
 
-def error_checking_and_logging(url, endpoint):
+def error_checking_and_logging(url: str, endpoint: str) -> complex:
     header = {"Content-Type":"application/json",
         "Accept-Encoding":"deflate",
         "User-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0) Gecko/20100101 Firefox/138.0"}
