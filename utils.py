@@ -65,7 +65,7 @@ def error_checking_and_logging(url: str, endpoint: str) -> complex:
         input("Press ENTER to close program...")
         exit()
 
-def checking_if_error_is_active(data, endpoint):
+def checking_if_error_is_active(data: complex, endpoint: str) -> None:
     if data["error"] != None:
         print("Error relayed via API.")
         print("Documenting error in logs...")
