@@ -38,7 +38,7 @@ def update_silly_meter_status():
 
 def main_logic_loop(data):
     end = 0
-    while end == 0:
+    while not end:
         if data['state'] == "Inactive":
             print("\n=================================")
             print("\nSilly Meter not currently active!\n")
