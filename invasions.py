@@ -12,7 +12,6 @@ ENDPOINT = "(INV)"
 def welcome():
     print("\n-Welcome to the ToonTown Rewritten (TTR) Invasion Scanner-")
     print(f"It is currently {utils.dt()}\n")
-    time.sleep(0.5)
 
 
 def sorting_for_csv(data):
@@ -69,25 +68,21 @@ def remaining_invasion_time(data, district):
         return time_in_invasion
 
 
-def pull_API_data_again(end_program):
+def pull_API_data_again():
     for attempt in range(5):
         if attempt == 4:
             print("Too many invalid entries. Going back to Main Menu...")
-            end_program = 1
-            return end_program
+            return True
         user_input = input("> ").lower()
         if user_input.lower() in ["no", "n"]:
-            end_program = 1
             print("\nExiting Invasion Scanner...")
-            return end_program
+            return True
         elif user_input not in ["no", "n", "yes", "y", "ye"] and attempt <= 2:
             print("Invalid entry. Would you like to check for new invasions? (yes/no)")
             continue
         elif user_input in ["yes", "y", "ye"] and attempt <= 3:
             print("\nPulling current invasions in ToonTown Rewritten...\n")
-            end_program = 0
-            time.sleep(1)
-            return end_program
+            return False
 
 
 def main():
@@ -100,5 +95,5 @@ def main():
         result = pandas.read_csv("adjustedData.csv")
         print(result)
         print("\nDo you want to pull a new list of current invasions? (yes/no)")
-        end_program = pull_API_data_again(end_program)
+        end_program = pull_API_data_again()
     time.sleep(1)
