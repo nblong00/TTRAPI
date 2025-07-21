@@ -66,45 +66,34 @@ def dataframe_map_name(user_input):
         print("Low Population District Map:\n")
 
 
-def pull_API_data_again(end_program, refresh_current_map_pop, restart_program):
+def pull_API_data_again():
     for attempt in range(5):
         if attempt == 4:
             print("Too many invalid entries. Program closing...")
-            end_program = 1
-            restart_program = 0
-            return end_program, refresh_current_map_pop, restart_program
+            return True, False, False
         user_input = input("> ").lower()
         if user_input in ["no", "n"]:
-            end_program = 1
-            restart_program = 0
             print("\nWould you like to go back to the Populations submenu? (yes/no)\n")
             for input_attempt in range(5):
                 if input_attempt == 4:
                     print("Too many invalid entries. Program closing...")
-                    end_program = 1
-                    restart_program = 0
-                    return end_program, refresh_current_map_pop, restart_program
+                    return True, False, False
                 restart_program_input = input("> ").lower()
                 if restart_program_input in ["yes", "y", "ye"]:
-                    restart_program = 1
-                    end_program = 0
-                    return end_program, refresh_current_map_pop, restart_program
+                    return False, False, True
                 elif restart_program_input not in ["no", "n", "yes", "y", "ye"] and input_attempt <= 2:
                     print("\nInvalid entry. Go back to the Populations submenu? (yes/no)\n")
                     continue
                 elif restart_program_input in ["no", "n"]:
                     print("\nExiting Population Map...")
-                    restart_program = 0 
-                    return end_program, refresh_current_map_pop, restart_program
+                    return True, False, False
         elif user_input not in ["no", "n", "yes", "y", "ye"] and attempt <= 2:
             print("\nInvalid entry. Refresh the current population map? (yes/no)\n")
             continue
         elif user_input in ["yes", "y", "ye"] and attempt <= 3:
             print("\nRefreshing Current Population Map...\n")
             time.sleep(1)
-            refresh_current_map_pop = 1
-            restart_program = 0
-            return end_program, refresh_current_map_pop, restart_program
+            return False, True, False
 
 
 def main_logic_loops(data):
@@ -121,9 +110,7 @@ def main_logic_loops(data):
             print("\nWould you like to refresh the current population map? (yes/no)\n")
             (end_program,
              refresh_current_map_pop,
-             restart_program) = pull_API_data_again(end_program,
-                                                    refresh_current_map_pop,
-                                                    restart_program)
+             restart_program) = pull_API_data_again()
             if restart_program or end_program:
                 break
 
