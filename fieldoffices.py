@@ -49,22 +49,19 @@ def pullin_API_data_again():
     for attempt in range(5):
         if attempt == 4:
             print("Too many invalid entries. Program closing...")
-            end_program = 1
-            return end_program
+            return True
         user_input = input("> ")
         if user_input.lower() in ["no", "n"]:
-            end_program = 1
             print("\nExiting Field Office Scanner...")
             time.sleep(1)
-            return end_program
+            return True
         elif user_input.lower() not in ["no", "n", "yes", "y", "ye"] and attempt <= 2:
             print("Invalid entry. Would you like to run the Field Office Scanner again? (yes/no)")
             continue
         elif user_input.lower() in ["yes", "y", "ye"] and attempt <= 3:
             print("\nRunning Field Office Scanner in ToonTown Rewritten...\n")
-            end_program = 0
             time.sleep(1)
-            return end_program
+            return False
 
 
 def main():
