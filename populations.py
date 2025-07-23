@@ -14,7 +14,7 @@ def welcome(data):
 
 
 def user_options():
-    failed_input = 1
+    failed_input = True
     options = ("\nEnter one of the below number options:" +
               "\n1 - See all district populations" + 
               "\n2 - See only high population districts" +
@@ -30,7 +30,7 @@ def user_options():
             if user_input not in ["1", "2", "3"]:
                 print(f"\nInvalid input. {options}")
             else:
-                failed_input = 0
+                failed_input = False
                 break
     print()
     return user_input
@@ -97,9 +97,9 @@ def pull_API_data_again():
 
 
 def main_logic_loops(data):
-    end_program = 0
-    refresh_current_map_pop = 0
-    restart_program = 1
+    end_program = False
+    refresh_current_map_pop = False
+    restart_program = True
     while not end_program:
         user_input = user_options()
         get_API_write_csv(data, user_input)
