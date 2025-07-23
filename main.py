@@ -6,7 +6,7 @@ import sillymeter
 
 
 def menu_options():
-    failed_input = 1
+    failed_input = True
     options = ("Enter one of the below number options:"
               + "\n1 - See active district populations" 
               + "\n2 - See active invasions"
@@ -24,7 +24,7 @@ def menu_options():
             if user_input not in ["1", "2", "3", "4", "5"]:
                 print(f"\nInvalid input. {options}")
             else:
-                failed_input = 0
+                failed_input = True
                 break
     return user_input
 
