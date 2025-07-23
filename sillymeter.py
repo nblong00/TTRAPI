@@ -1,10 +1,17 @@
+from dateutil import relativedelta
 import utils
 import datetime
 import time
-from dateutil import relativedelta
 
 URL = "https://www.toontownrewritten.com/api/sillymeter"
 ENDPOINT = "(SIM)"
+
+
+def current_rewards(data):
+    i = 0
+    for reward in data['rewards']:
+        print(reward + " | " + data['rewardDescriptions'][i])
+        i += 1
 
 
 def timestamp_conversions(data):
@@ -54,13 +61,6 @@ def main_logic_loop(data):
             print()
             timestamp_conversions(data)
         end = update_silly_meter_status()
-
-
-def current_rewards(data):
-    i = 0
-    for reward in data['rewards']:
-        print(reward + " | " + data['rewardDescriptions'][i])
-        i += 1
 
 
 def main():
