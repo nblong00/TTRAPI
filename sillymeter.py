@@ -30,14 +30,14 @@ def update_silly_meter_status():
     refresh_status = input("Refresh Silly Meter Status (yes/no): \n> ")
     if refresh_status in ["yes", "ye", "y"]:
         time.sleep(0.5)
-        return 0
+        return False
     elif refresh_status in ["no", "n"]:
         time.sleep(0.5)
-        return 1
+        return True
 
 
 def main_logic_loop(data):
-    end = 0
+    end = False
     while not end:
         if data['state'] == "Inactive":
             print("\n=================================")
