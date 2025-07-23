@@ -86,7 +86,7 @@ def pull_API_data_again():
 
 
 def main():
-    end_program = 0
+    end_program = False
     welcome()
     while not end_program:
         data = utils.error_checking_and_logging(URL, ENDPOINT)
