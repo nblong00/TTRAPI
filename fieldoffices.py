@@ -79,3 +79,4 @@ def main():
         result = pandas.read_csv("AdjustedData.csv")
         print(result)
         end_game = pullin_API_data_again()
+        utils.delete_csv_from_system()

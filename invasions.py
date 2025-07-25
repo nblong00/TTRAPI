@@ -96,4 +96,5 @@ def main():
         print(result)
         print("\nDo you want to pull a new list of current invasions? (yes/no)")
         end_program = pull_API_data_again()
+        utils.delete_csv_from_system()
     time.sleep(1)

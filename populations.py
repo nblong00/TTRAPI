@@ -120,4 +120,5 @@ def main():
     utils.checking_if_error_is_active(data, ENDPOINT)
     welcome(data)
     main_logic_loops(data)
+    utils.delete_csv_from_system()
     time.sleep(1)
