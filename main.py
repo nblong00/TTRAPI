@@ -24,7 +24,7 @@ def menu_options():
             if user_input not in ["1", "2", "3", "4", "5"]:
                 print(f"\nInvalid input. {options}")
             else:
-                failed_input = True
+                failed_input = False
                 break
     return user_input
 
