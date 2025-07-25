@@ -2,6 +2,7 @@ import csv
 import datetime
 import requests
 import logging
+import os
 
 logging.basicConfig(filename="api.log", level=logging.INFO)
 
@@ -38,6 +39,10 @@ def write_data_to_csv(write_data: complex) -> None:
         writer = csv.writer(csvfile, delimiter=",", lineterminator="")
         writer.writerow(write_data)
         csv_new_line(csvfile)
+
+
+def delete_csv_from_system():
+    os.remove("adjustedData.csv")
 
 
 def error_checking_and_logging(url: str, endpoint: str) -> complex:
