@@ -7,12 +7,14 @@ import sillymeter
 
 def menu_options():
     failed_input = True
-    options = ("Enter one of the below number options:"
-              + "\n1 - See active district populations" 
-              + "\n2 - See active invasions"
-              + "\n3 - See active field offices"
-              + "\n4 - Check if Silly Meter is active"
-              + "\n5 - EXIT APP\n")
+    options = """
+              \rEnter one of the below number options:
+              \r1 - See active district populations
+              \r2 - See active invasions
+              \r3 - See active field offices
+              \r4 - Check if Silly Meter is active
+              \r5 - EXIT APP
+              """
     print(options)
     while failed_input:
         for attempt in range(5):
@@ -31,7 +33,7 @@ def menu_options():
 
 def menu():
         while True:
-            print("\nWelcome to the ToonTown Rewritten App.\n")
+            print("\nWelcome to the ToonTown Rewritten App.")
             user_input = menu_options()
             if user_input == "1":
                 populations.main()
@@ -42,8 +44,10 @@ def menu():
             elif user_input == "4":
                 sillymeter.main()
             elif user_input == "5":
-                print("Thank you for using the ToonTown Rewritten App."
-                    + "\nProgram closing...")
+                print("""
+                      \rThank you for using the ToonTown Rewritten App.
+                      \rProgram closing...
+                      """)
                 time.sleep(1)
                 exit()
 
