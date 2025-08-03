@@ -15,10 +15,11 @@ def welcome(data):
 
 def user_options():
     failed_input = True
-    options = ("\nEnter one of the below number options:" +
-              "\n1 - See all district populations" + 
-              "\n2 - See only high population districts" +
-              "\n3 - See only low population districts\n")
+    options = ("""\nEnter one of the below number options:
+               \r1 - See all district populations 
+               \r2 - See only high population districts
+               \r3 - See only low population districts
+               """)
     print(options)
     while failed_input:
         for attempt in range(5):
