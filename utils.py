@@ -51,22 +51,17 @@ def error_checking_and_logging(url: str, endpoint: str) -> complex:
         "User-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0) Gecko/20100101 Firefox/138.0"}
     response = requests.get(url, headers=header)
     if response.status_code != 200:
-            logging.warning(f"{endpoint} {dt()} - Response code "
-                            + f"received: {response.status_code}")
-            print(f"{endpoint} API responded with an "
-                  + f"unsuccessful {response.status_code} code.")
+            logging.warning(f"{endpoint} {dt()} - Response code received: {response.status_code}")
+            print(f"{endpoint} API responded with an unsuccessful {response.status_code} code.")
     else:
-        logging.info(f"{endpoint} {dt()} -  Response code "
-                     + f"received: {response.status_code}")
+        logging.info(f"{endpoint} {dt()} -  Response code received: {response.status_code}")
     try:
         data = response.json()
         if endpoint != "(SIM)":
-            logging.info(f"{endpoint} API data updated from central TTR server at "
-                         +  f"{convert_epoch_timestamp_string(data)}")
+            logging.info(f"{endpoint} API data updated from central TTR server at {convert_epoch_timestamp_string(data)}")
         return data
     except requests.exceptions.JSONDecodeError:
-        logging.error(f"{endpoint} {dt()} - API JSON may be malformed. "
-                      + "We were unable to extract data from the response.")
+        logging.error(f"{endpoint} {dt()} - API JSON may be malformed. We were unable to extract data from the response.")
         input("Press ENTER to close program...")
         exit()
 
@@ -74,7 +69,6 @@ def checking_if_error_is_active(data: complex, endpoint: str) -> None:
     if data["error"] != None:
         print("Error relayed via API.")
         print("Documenting error in logs...")
-        logging.error(f"{endpoint} {dt()} - API is reporting error in "
-                      + f"payload: {data['error']}")
+        logging.error(f"{endpoint} {dt()} - API is reporting error in payload: {data['error']}")
         input("Press ENTER to close...")
         exit()
