@@ -19,17 +19,17 @@ def timestamp_conversions(data):
     time_difference = relativedelta.relativedelta(converted_starting_timestamp,
                                                   datetime.datetime.now())
     if data['state'] == "Active" and data['winner'] == None:
-        return_statement = f"Silly Points will be updated in {time_difference.minutes} minutes!"
+        return_statement = f"\rSilly Points will be updated in {time_difference.minutes} minutes!"
         if time_difference.minutes <= 1:
-            return_statement = f"Silly Points will be updated in 1 minute!"
+            return_statement = f"\rSilly Points will be updated in 1 minute!"
     elif data['state'] == "Inactive":
-        return_statement = f"Silly Meter will become active in {time_difference.minutes} minutes!"
+        return_statement = f"\rSilly Meter will become active in {time_difference.minutes} minutes!"
         if time_difference.minutes <= 1:
-            return_statement = f"Silly Meter will become active in 1 minute!"
+            return_statement = f"\rSilly Meter will become active in 1 minute!"
     elif data['state'] == "Reward":
-        return_statement = f"Silly Meter reward ends in {time_difference.minutes} minutes!"
+        return_statement = f"\rSilly Meter reward ends in {time_difference.minutes} minutes!"
         if time_difference.minutes <= 1:
-            return_statement = f"Silly Meter reward ends in 1 minute!"
+            return_statement = f"\rSilly Meter reward ends in 1 minute!"
     print(return_statement)
 
 
@@ -47,16 +47,20 @@ def main_logic_loop(data):
     end = False
     while not end:
         if data['state'] == "Inactive":
-            print("\n=================================")
-            print("\nSilly Meter not currently active!\n")
+            print("""
+                  \r=================================
+                  \rSilly Meter not currently active!
+                  """, end=" ")
             timestamp_conversions(data)
-            print("=================================")
+            print("=================================\n")
             time.sleep(0.5)
         elif data['state'] == "Active" and data['winner'] == None:
-            print("\n=================================")
-            print("Silly Meter is active but reward not decided!")
-            print("Potential Rewards & Descriptions:")
-            print("=================================\n")
+            print("""
+                  \r=================================
+                  \rSilly Meter is active but reward not decided!
+                  \rPotential Rewards & Descriptions:
+                  \r=================================
+                  """)
             current_rewards(data)
             print()
             timestamp_conversions(data)

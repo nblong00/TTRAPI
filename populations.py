@@ -7,15 +7,18 @@ ENDPOINT = "(POP)"
 
 
 def welcome(data):
-    print("\n-Welcome to the ToonTown Rewritten (TTR) Population Map-")
-    print(f"It is currently {utils.dt()}")
-    print(f"Total population: {data['totalPopulation']} users")
+    print(f"""
+          \r-Welcome to the ToonTown Rewritten (TTR) Population Map-
+          \rIt is currently {utils.dt()}
+          \rTotal population: {data['totalPopulation']} users
+          """, end=" ")
     time.sleep(0.5)
 
 
 def user_options():
     failed_input = True
-    options = ("""\nEnter one of the below number options:
+    options = ("""
+               \rEnter one of the below number options:
                \r1 - See all district populations 
                \r2 - See only high population districts
                \r3 - See only low population districts

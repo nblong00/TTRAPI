@@ -10,8 +10,10 @@ ENDPOINT = "(INV)"
 
 
 def welcome():
-    print("\n-Welcome to the ToonTown Rewritten (TTR) Invasion Scanner-")
-    print(f"It is currently {utils.dt()}\n")
+    print("""
+          \r-Welcome to the ToonTown Rewritten (TTR) Invasion Scanner-
+          \rIt is currently {utils.dt()}
+          """)
 
 
 def sorting_for_csv(data):
