@@ -53,7 +53,6 @@ def main_logic_loop(data):
                   """, end=" ")
             timestamp_conversions(data)
             print("=================================\n")
-            time.sleep(0.5)
         elif data['state'] == "Active" and data['winner'] == None:
             print("""
                   \r=================================

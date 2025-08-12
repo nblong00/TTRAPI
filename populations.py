@@ -12,7 +12,6 @@ def welcome(data):
           \rIt is currently {utils.dt()}
           \rTotal population: {data['totalPopulation']} users
           """, end=" ")
-    time.sleep(0.5)
 
 
 def user_options():
@@ -74,6 +73,7 @@ def pull_API_data_again():
     for attempt in range(5):
         if attempt == 4:
             print("Too many invalid entries. Program closing...")
+            time.sleep(1)
             return True, False, False
         user_input = input("> ").lower()
         if user_input in ["no", "n"]:
@@ -125,4 +125,3 @@ def main():
     welcome(data)
     main_logic_loops(data)
     utils.delete_csv_from_system()
-    time.sleep(1)

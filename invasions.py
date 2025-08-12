@@ -1,16 +1,16 @@
 from dateutil import relativedelta
 import pandas
 import utils
-import time
 import datetime
 import math
+import time
 
 URL = "https://www.toontownrewritten.com/api/invasions"
 ENDPOINT = "(INV)"
 
 
 def welcome():
-    print("""
+    print(f"""
           \r-Welcome to the ToonTown Rewritten (TTR) Invasion Scanner-
           \rIt is currently {utils.dt()}
           """)
@@ -74,6 +74,7 @@ def pull_API_data_again():
     for attempt in range(5):
         if attempt == 4:
             print("Too many invalid entries. Going back to Main Menu...")
+            time.sleep(1)
             return True
         user_input = input("> ").lower()
         if user_input.lower() in ["no", "n"]:
@@ -99,4 +100,3 @@ def main():
         print("\nDo you want to pull a new list of current invasions? (yes/no)")
         end_program = pull_API_data_again()
         utils.delete_csv_from_system()
-    time.sleep(1)
