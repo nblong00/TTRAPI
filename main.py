@@ -32,24 +32,24 @@ def menu_options():
 
 
 def menu():
-        while True:
-            print("\nWelcome to the ToonTown Rewritten App.")
-            user_input = menu_options()
-            if user_input == "1":
-                populations.main()
-            elif user_input == "2":
-                invasions.main()
-            elif user_input == "3":
-                fieldoffices.main()
-            elif user_input == "4":
-                sillymeter.main()
-            elif user_input == "5":
-                print("""
-                      \rThank you for using the ToonTown Rewritten App.
-                      \rProgram closing...
-                      """)
-                time.sleep(1)
-                exit()
+    while True:
+        print("\nWelcome to the ToonTown Rewritten App.")
+        user_input = menu_options()
+        if user_input == "1":
+            populations.main()
+        elif user_input == "2":
+            invasions.main()
+        elif user_input == "3":
+            fieldoffices.main()
+        elif user_input == "4":
+            sillymeter.main()
+        elif user_input == "5":
+            print("""
+                    \rThank you for using the ToonTown Rewritten App.
+                    \rProgram closing...
+                    """)
+            time.sleep(1)
+            exit()
 
 
 if __name__ == '__main__':
