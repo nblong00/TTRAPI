@@ -20,38 +20,44 @@ def sorting_for_csv(data):
     column_names = ["DistrictName", "Type", "Progress", "InvasionTimeoutIn"]
     utils.create_csv_for_data(column_names)
     for district in data["invasions"]:
-            if "Tele\u0003marketer" in data['invasions'][district]['type']:
-                data['invasions'][district]['type'] = "Telemarketer" 
-            elif "Micro\u0003manager" in data['invasions'][district]['type']:
-                data['invasions'][district]['type'] = "Micromanager"
-            elif "Blood\u0003sucker" in data['invasions'][district]['type']:
-                data['invasions'][district]['type'] = "Bloodsucker"
-            data_to_write = [district, 
-                            data['invasions'][district]['type'],
-                            data['invasions'][district]['progress'],
-                            remaining_invasion_time(data, district)]
-            utils.write_data_to_csv(data_to_write)
+        if "Tele\u0003marketer" in data['invasions'][district]['type']:
+            data['invasions'][district]['type'] = "Telemarketer" 
+        elif "Micro\u0003manager" in data['invasions'][district]['type']:
+            data['invasions'][district]['type'] = "Micromanager"
+        elif "Blood\u0003sucker" in data['invasions'][district]['type']:
+            data['invasions'][district]['type'] = "Bloodsucker"
+        if data['invasions'][district]['progress'].split("/")[1] == '1000000':
+            data['invasions'][district]['progress'] = "-Mega-Invasion-"
+        data_to_write = [district, 
+                        data['invasions'][district]['type'],
+                        data['invasions'][district]['progress'],
+                        remaining_invasion_time(data, district)]
+        utils.write_data_to_csv(data_to_write)
     print("Invasion Scanner Results:\n")
 
 
 def remaining_invasion_time(data, district):
     converted_starting_timestamp = (datetime.datetime.fromtimestamp(data['invasions'][district]['startTimestamp']))
-    max_progress_value = int(data['invasions'][district]['progress'].split("/")[1])
-    allowed_invasion_time = math.ceil((max_progress_value * 0.7) / 60)
+    try:
+        max_progress_value = data['invasions'][district]['progress'].split("/")[1]
+    except IndexError:
+        max_progress_value = '1000000'
+    allowed_invasion_time_minutes = math.ceil((int(max_progress_value) * 0.7) / 60)
+    allowed_time_hours_minutes = divmod(allowed_invasion_time_minutes, 60) 
     hours_left = 0
     minutes_left = 0
-    if divmod(allowed_invasion_time, 60)[0] >= 1:
+    if allowed_time_hours_minutes[0] >= 1:
         hours_left = 1
-        minutes_left = divmod(allowed_invasion_time, 60)[1]
-        # Accounting for Mega-Invasions (time based)
-        if max_progress_value == 1000000:
+        minutes_left = allowed_time_hours_minutes[1]
+        # Check back later to see if still valid
+        if max_progress_value == '1000000':
             hours_left = 3
             data['invasions'][district]['progress'] = "-Mega-Invasion-"
         invasion_end_time = (converted_starting_timestamp
                             + datetime.timedelta(hours = hours_left, 
                                                 minutes = minutes_left))
     else:
-        minutes_left = divmod(allowed_invasion_time, 60)[1]
+        minutes_left = divmod(allowed_invasion_time_minutes, 60)[1]
         invasion_end_time = (converted_starting_timestamp
                             + datetime.timedelta(minutes = minutes_left))
     diff_now_end = relativedelta.relativedelta(invasion_end_time, 
